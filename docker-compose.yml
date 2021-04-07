@@ -1,0 +1,28 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:8.0
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./mysql-confd:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: docker_rails_api_mysql_1
+  app:
+    tty: true
+    stdin_open: true
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+volumes:
+  mysql-data:
+    driver: local
