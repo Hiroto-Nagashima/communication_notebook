@@ -22,7 +22,7 @@ paths:
         -
           name: kidId
           in: path
-          description: 特定の子供の情報を取得
+          description: 特定の子供の名前と年齢を取得
           required: true
           type: integer
           format: int64
@@ -41,7 +41,7 @@ paths:
                 type: string
               age:
                 type: integer
-  /communication_notebook/{kidId}/{date}:
+  /communication_notebook/{kidId}?{date=Date}:
     get:
       tags:
       - "communication_notebook"
@@ -53,31 +53,22 @@ paths:
         # An example parameter that is in query and is required
         - name: kidId
           in: path
-          description: 子供のIDと日付を
+          description: 子供のID
           required: true
           type: integer
           format: int32
         - name: date
-          in: path
-          description: 子供のIDと日付を
+          in: query
+          description: 日付
           required: true
-          type: integer
-          format: int32
+          type: string
+          format: date-time
       # Expected responses for this operation:
       responses:
-        # Response code
-        200:
-          description: 成功時のレスポンス
-          # A schema describing your response object.
-          # Use JSON Schema format
+        "200":
+          description: "成功時のレスポンス"
           schema:
-            title: 子供の年齢と名前を返す
-            type: object
-            properties:
-              name:
-                type: string
-              age:
-                type: integer
+            $ref: '#/definitions/Communication_notebook'
   /communication_notebook/{kidId}:
     put:
       tags:
