@@ -3,11 +3,12 @@ import ja from "date-fns/locale/ja";
 import format from "date-fns/format";
 import React, { VFC } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
+import axios from 'axios';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import axios from 'axios';
+
 
 class ExtendedUtils extends DateFnsUtils {
   getCalendarHeaderText(date:Date) {
@@ -18,14 +19,17 @@ class ExtendedUtils extends DateFnsUtils {
   }
 }
 export type Props={
-  open: boolean
-  onAccept:() => void
+  open?: boolean
 }
 
 export const DatePickers:VFC<Props>=(props)=> {
-
-  const { open,onAccept } = props
-  // The first commit of Material-UI
+  const { open } = props
+  const onClickOK = ()=>(
+    axios
+    .get("https://google.com")
+    .then((res) => console.log(res))
+    .catch((e) => console.log(e))
+  )
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(
     new Date(),
   );
@@ -33,17 +37,7 @@ export const DatePickers:VFC<Props>=(props)=> {
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
   };
-  const onClickOK = ()=>(
-    axios
-    .get("https://google.com",{
-      params: {
-        date: selectedDate
-      }
-    })
-    .then((res) => console.log(res))
-    .catch((e) => console.log(e))
-  )
-
+  // The first commit of Material-UI
   return (
     <MuiPickersUtilsProvider locale={ja} utils={ExtendedUtils}>
       <KeyboardDatePicker
@@ -51,15 +45,16 @@ export const DatePickers:VFC<Props>=(props)=> {
           id="date"
           label="日付選択"
           okLabel="決定"
+          open={open}
           cancelLabel="キャンセル"
+          // open={false}
           format="yyyy/MM/dd"
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
             'aria-label': 'change date',
           }}
-          open={open}
-          onAccept={onAccept}
+          // onClick={onClickOK}
         />
     </MuiPickersUtilsProvider>
   );

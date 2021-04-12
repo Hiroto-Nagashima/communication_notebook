@@ -2,12 +2,11 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
 import {DatePickers} from './DatePickers';
-import { Props } from './DatePickers';
+
 
 export default {
   title: 'atoms/DatePickers',
   component: DatePickers,
-  argTypes: { onAccept: { action: 'clicked' } },
   // タブバーで特定の色を試せる
   decorators: [
     (Story) => (
@@ -16,9 +15,12 @@ export default {
       </div>
     ),
   ],
+
 } as Meta;
 
-const Template: Story<Props> = (args) => <DatePickers {...args} />;
+
+
+const Template: Story = (args) => <DatePickers {...args} />;
 
 export const OpenFalse = Template.bind({});
 OpenFalse.args = {
