@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { VFC } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 
@@ -13,15 +13,16 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function SimpleAlerts() {
+export type Props={
+  status: "error" | "warning" | "info" | "success"
+  label : string
+}
+export const SimpleAlerts:VFC<Props>=(props)=> {
   const classes = useStyles();
-
+  const { status, label} = props
   return (
     <div className={classes.root}>
-      <Alert severity="error">This is an error alert — check it out!</Alert>
-      <Alert severity="warning">This is a warning alert — check it out!</Alert>
-      <Alert severity="info">This is an info alert — check it out!</Alert>
-      <Alert severity="success">This is a success alert — check it out!</Alert>
+      <Alert severity={status}>{label}</Alert>
     </div>
   );
 }
