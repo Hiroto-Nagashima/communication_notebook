@@ -55,7 +55,7 @@ export const SimpleMenu:VFC<Props>=(props)=> {
           </MenuItem>
         ))}
       </Menu>
-      <Input value={options[selectedIndex]}/>
+      <Input value={options[selectedIndex]} readOnly/>
     </div>
   );
 }
