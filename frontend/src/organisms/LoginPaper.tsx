@@ -34,10 +34,10 @@ export const LoginPaper:VFC<Props>=(props)=> {
         <Box component="h1" p={2} textAlign="center">
           {title}
         </Box>
-        <Box textAlign="center">
+        <Box textAlign="center" mx={4}>
           <ComposedTextField textName="Email" placeholder="xxxxx@xxx.ne.jp"/>
         </Box>
-        <Box textAlign="center">
+        <Box textAlign="center" m={4}>
           <ComposedTextField textName="Password" placeholder="xxxxxxxxx"/>
         </Box>
         <Box textAlign="center">
