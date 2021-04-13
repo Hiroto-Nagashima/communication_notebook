@@ -3,6 +3,8 @@ import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import styled from 'styled-components'
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,11 +31,12 @@ export const ComposedTextField:VFC<Props>=(props)=> {
   };
 
   return (
-    <form className={classes.root} noValidate autoComplete="off">
-      <FormControl variant="outlined">
+      <SFormControl variant="outlined">
         <InputLabel htmlFor="component-outlined">{textName}</InputLabel>
-        <OutlinedInput id="component-outlined" value={name} onChange={handleChange} label={textName} placeholder={placeholder} />
-      </FormControl>
-    </form>
+        <OutlinedInput style={{width:"100%"}} id="component-outlined" value={name} onChange={handleChange} label={textName} placeholder={placeholder} />
+      </SFormControl>
   );
 }
+const SFormControl=styled(FormControl)`
+  display: grid
+`
