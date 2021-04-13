@@ -24,7 +24,7 @@ export const Email = (args:Props)=>(
 
 export const Password = (args:Props)=>(
   <Grid container>
-    <Grid item xs={10}>
+    <Grid item xs={6}>
       <ComposedTextField textName="Password" placeholder="xxxxx"/>
     </Grid>
   </Grid>

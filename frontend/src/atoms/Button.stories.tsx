@@ -1,5 +1,6 @@
 import { Story, Meta } from '@storybook/react';
 import { Props, MyButton } from './Button';
+import { Grid } from '@material-ui/core';
 
 export default {
   title: 'atoms/Button',
@@ -15,12 +16,6 @@ export default {
       control:{
         type: 'radio',
         options: ["text", "outlined", "contained"]
-      }
-    } ,
-    size:{
-      control:{
-        type: 'radio',
-        options: ["small", "medium", "large"]
       }
     } ,
   },
@@ -43,3 +38,10 @@ LoginButton.args = {
   label: "ログイン"
 };
 
+export const GridButton = (args:Props)=>(
+  <Grid container>
+    <Grid item xs={6}>
+      <MyButton variant="contained" color= "primary" label="ログイン"/>
+    </Grid>
+  </Grid>
+);
