@@ -32,7 +32,7 @@ export const ComposedTextField:VFC<Props>=(props)=> {
   return (
       <SFormControl variant="outlined">
         <InputLabel htmlFor="component-outlined">{textName}</InputLabel>
-        <OutlinedInput style={{width:"100%"}} id="component-outlined" value={name} onChange={handleChange} label={textName} placeholder={placeholder} />
+        <OutlinedInput style={{width:"100%"}} id="component-outlined" value={name} onChange={handleChange} label={textName} placeholder={placeholder}  />
       </SFormControl>
   );
 }
