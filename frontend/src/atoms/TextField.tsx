@@ -4,7 +4,6 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import styled from 'styled-components'
-import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
