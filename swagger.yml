@@ -1,38 +1,27 @@
 swagger: '2.0'
 
-# This is your document metadata
 info:
+  description: Communication_NotebookのAPI仕様です。
   version: "0.0.0"
   title: Communication_Notebook
-
-# Describe your paths here
 paths:
-  # This is a path endpoint. Change it.
-  /kid/{kidId}:
-    # This is a HTTP operation
+  /kids/:id:
     get:
       tags:
-      - "kid"
-      # Describe this verb here. Note: you can use markdown
+      - "kids"
       summary: "子供の名前、年齢取得"
       description: ""
-      # This is array of GET operation parameters:
       parameters:
-        # An example parameter that is in query and is required
         -
-          name: kidId
+          name: kid_id
           in: path
           description: 特定の子供の名前と年齢を取得
           required: true
           type: integer
           format: int64
-      # Expected responses for this operation:
       responses:
-        # Response code
         200:
           description: 成功時のレスポンス
-          # A schema describing your response object.
-          # Use JSON Schema format
           schema:
             title: 子供の年齢と名前を返す
             type: object
@@ -41,77 +30,69 @@ paths:
                 type: string
               age:
                 type: integer
-  /communication_notebook/{kidId}?{date=Date}:
+        404:
+          description: "該当する子供が見つからない"
+          schema:
+            $ref: '#/definitions/404Error'
+  /communication_notebooks/:id:
     get:
       tags:
-      - "communication_notebook"
-      # Describe this verb here. Note: you can use markdown
+      - "communication_notebooks"
       summary: "ある日付の連絡帳の詳細表示"
       description: ""
-      # This is array of GET operation parameters:
       parameters:
-        # An example parameter that is in query and is required
-        - name: kidId
+        - name: communication_notebook_id
           in: path
-          description: 子供のID
+          description: 連絡帳のID
           required: true
           type: integer
           format: int32
-        - name: date
-          in: query
-          description: 日付
-          required: true
-          type: string
-          format: date-time
-      # Expected responses for this operation:
       responses:
-        "200":
+        200:
           description: "成功時のレスポンス"
           schema:
             $ref: '#/definitions/Communication_notebook'
-  /communication_notebook/{kidId}:
+        404:
+          description: "該当する連絡帳が見つからない"
+          schema:
+            $ref: '#/definitions/404Error'
     put:
       tags:
-      - "communication_notebook"
-      # Describe this verb here. Note: you can use markdown
+      - "communication_notebooks"
       summary: "ある日付の連絡帳を更新"
       description: ""
-      # This is array of GET operation parameters:
       parameters:
-        # An example parameter that is in query and is required
         - name: "notebook"
           in: body
           description: 連絡帳の特定の情報を更新
           required: true
           schema:
             $ref: '#/definitions/Communication_notebook'
-      # Expected responses for this operation:
       responses:
-        "400":
+        400:
           description: "未入力箇所がある場合無効"
-        "200":
+          schema:
+            $ref: '#/definitions/400NoInputError'
+        200:
           description: "OK"
-  /communication_notebook:
     post:
       tags:
-      - "communication_notebook"
-      # Describe this verb here. Note: you can use markdown
+      - "communication_notebooks"
       summary: "ある日付の連絡帳を登録"
       description: ""
-      # This is array of GET operation parameters:
       parameters:
-        # An example parameter that is in query and is required
         - name: "notebook"
           in: body
           description: 特定の子供の情報を取得
           required: true
           schema:
             $ref: '#/definitions/Communication_notebook'
-      # Expected responses for this operation:
       responses:
-        "400":
+        400:
           description: "未入力箇所がある場合無効"
-        "200":
+          schema:
+            $ref: '#/definitions/400NoInputError'
+        200:
           description: "OK"
 definitions:
   Communication_notebook:
@@ -135,3 +116,23 @@ definitions:
         type: string
       memo:
         type: string
+  404Error:
+    type: "object"
+    properties:
+      status:
+        type: "integer"
+        example: "404"
+        format: "int64"
+      message:
+        type: "string"
+        example: "データが見つかりません"
+  400NoInputError:
+    type: "object"
+    properties:
+      status:
+        type: "integer"
+        example: "400"
+        format: "int64"
+      message:
+        type: "string"
+        example: "未入力箇所があります"
