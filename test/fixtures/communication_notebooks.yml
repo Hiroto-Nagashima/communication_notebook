@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bodyTemperature: 
+  hasBathed: false
+  mood: 
+  breakfast: MyText
+  dinner: MyText
+  memo: MyText
+
+two:
+  bodyTemperature: 
+  hasBathed: false
+  mood: 
+  breakfast: MyText
+  dinner: MyText
+  memo: MyText

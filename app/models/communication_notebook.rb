@@ -1,0 +1,2 @@
+class CommunicationNotebook < ApplicationRecord
+end
