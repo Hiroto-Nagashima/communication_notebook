@@ -4,7 +4,7 @@ import { Box } from '@material-ui/core';
 import { ComposedTextField } from '../atoms/TextField';
 import { MyButton } from '../atoms/Button';
 import { VFC } from 'react';
-import { useHistory } from 'react-router-dom'
+
 import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,13 +26,11 @@ export type Props={
   title: string
   value: number | null
   onChange:(e: React.ChangeEvent<HTMLInputElement>)=>void
+  onClick:()=>void
 }
 export const LoginPaper:VFC<Props>=(props)=> {
-  const { title,value, onChange } = props
-  const history = useHistory()
+  const { title,value,onClick, onChange } = props
   const classes = useStyles();
-
-  const onClickButton =()=> history.push('/')
   return (
     <div className={classes.root}>
       {/* <Paper elevation={0} />
@@ -46,7 +44,7 @@ export const LoginPaper:VFC<Props>=(props)=> {
         </Box>
         <Box textAlign="center">
           {/* <Link to="/login"><MyButton variant="contained" color="primary" label="Login"/></Link> */}
-          <MyButton onClick={onClickButton} variant="contained" color="primary" label="Login"/>
+          <MyButton onClick={onClick} variant="contained" color="primary" label="Login"/>
         </Box>
       </Paper>
     </div>

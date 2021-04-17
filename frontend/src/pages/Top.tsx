@@ -4,6 +4,7 @@ import { useEffect, useState, VFC } from "react";
 import { MenuAppBar } from '../organisms/Header'
 import { Kid } from '../types/api/kid'
 import { CircularDeterminate } from '../atoms/Spinner'
+import { useLocation } from 'react-router-dom'
 
 type Props={
 }
@@ -12,10 +13,11 @@ export const TopPage:VFC<Props>=(props)=>{
   const [result, setResult] = useState<Kid | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const { state } = useLocation()
 
-  const onClickGetUser =()=>(
+  const fetchUser =()=>(
     axios
-    .get<Kid>("http://localhost:3000/api/v1/kids/1")
+    .get<Kid>(`http://localhost:3000/api/v1/kids/${state}`)
     .then((res)=> {
       setResult(res.data)
       console.log(result)
@@ -25,7 +27,7 @@ export const TopPage:VFC<Props>=(props)=>{
   )
 
   useEffect(()=>{
-    onClickGetUser()
+    fetchUser()
   },[])
   return (
     <>
