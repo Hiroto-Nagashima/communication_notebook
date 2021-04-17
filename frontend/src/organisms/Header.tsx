@@ -26,15 +26,13 @@ export type Props={
   title:string
   iconColor: "inherit" | "default" | "primary" | "secondary"
   barColor: "inherit" | "default" | "primary" | "secondary"| 'transparent'
-  kid:{
-    name: string
-    nursery_name: string
-  }
+  name?: string
+  daycare_name?: string
   auth: boolean
 }
 
 export const MenuAppBar:VFC<Props>=(props)=> {
-  const {title, iconColor, barColor, kid, auth}= props
+  const {title, iconColor, barColor, name, daycare_name, auth}= props
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -80,8 +78,8 @@ export const MenuAppBar:VFC<Props>=(props)=> {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>ようこそ{kid.name}さん</MenuItem>
-                <MenuItem onClick={handleClose}>{kid.nursery_name}</MenuItem>
+                <MenuItem onClick={handleClose}>ようこそ{name}さん</MenuItem>
+                <MenuItem onClick={handleClose}>{daycare_name}</MenuItem>
               </Menu>
             </div>
           )}

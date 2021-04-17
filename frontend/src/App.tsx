@@ -13,7 +13,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/login">
-            <LoginPage label="Loginページです"/>
+            <LoginPage/>
           </Route>
           <Route exact path="/">
             <TopPage label="Topページです"/>
