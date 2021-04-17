@@ -12,3 +12,11 @@ Kid.create!(
   password: "1111111",
   daycare_name: "東京保育園"
 )
+
+Kid.create!(
+  name: '高橋次郎',
+  age: 1,
+  email: "6789@xxxxx.com",
+  password: "2222222",
+  daycare_name: "大阪保育園"
+)
