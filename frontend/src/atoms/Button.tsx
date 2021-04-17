@@ -18,17 +18,18 @@ export type Props={
   color: "inherit" | "primary" | "secondary" | "default"
   label: string
   url?: string
+  onClick?:()=>void
 }
 
 export const MyButton:VFC<Props>=(props)=> {
-  const {variant, color, label, url } = props
+  const {variant, color, label, url, onClick } = props
   // const classes = useStyles();
   return (
-    <SButton variant={variant} color={color} href={url}>
+    <SButton variant={variant} color={color} href={url} onClick={onClick}>
       {label}
     </SButton>
   );
 }
 const SButton=styled(Button)`
-  width: 100%
+  width: 90%
 `

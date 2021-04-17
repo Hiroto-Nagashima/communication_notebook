@@ -33,7 +33,7 @@ export const Password = (args:Props)=>(
 export const BodyTemperature = (args:Props)=>(
   <Grid container>
     <Grid item xs={6}>
-      <ComposedTextField textName="体温" placeholder="36.x"/>
+      <ComposedTextField textName="体温" placeholder="36.x" value={1} />
     </Grid>
   </Grid>
 );

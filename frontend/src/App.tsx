@@ -1,7 +1,7 @@
 import './App.css';
-import { LoginPage } from './pages/Login';
-import { RegistrationPage } from './pages/Registration';
 import { TopPage } from './pages/Top';
+import { RegistrationPage } from './pages/Registration';
+import { LoginPage } from './pages/Login';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
@@ -16,7 +16,7 @@ function App() {
             <LoginPage/>
           </Route>
           <Route exact path="/">
-            <TopPage label="Topページです"/>
+            <TopPage/>
           </Route>
           <Route exact path="/registration">
             <RegistrationPage label="登録画面です"/>

@@ -19,11 +19,13 @@ const useStyles = makeStyles((theme: Theme) =>
 export type Props ={
   textName: string
   placeholder: string
+  onChange?:(e: React.ChangeEvent<HTMLInputElement>)=>void
+  value?: number | null
 }
 export const ComposedTextField:VFC<Props>=(props)=> {
-  const { textName, placeholder } = props
+  const { textName, placeholder,onChange, value } = props
   const [name, setName] = React.useState('');
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -32,7 +34,7 @@ export const ComposedTextField:VFC<Props>=(props)=> {
   return (
       <SFormControl variant="outlined">
         <InputLabel htmlFor="component-outlined">{textName}</InputLabel>
-        <OutlinedInput style={{width:"100%"}} id="component-outlined" value={name} onChange={handleChange} label={textName} placeholder={placeholder}  />
+        <OutlinedInput style={{width:"100%"}} id="component-outlined" value={value} onChange={onChange} label={textName} placeholder={placeholder}  />
       </SFormControl>
   );
 }

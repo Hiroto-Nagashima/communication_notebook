@@ -41,7 +41,7 @@ LoginButton.args = {
 export const GridButton = (args:Props)=>(
   <Grid container>
     <Grid item xs={6}>
-      <MyButton variant="contained" color= "primary" label="ログイン"/>
+      <MyButton variant="contained" color= "primary" label="ログイン" />
     </Grid>
   </Grid>
 );
