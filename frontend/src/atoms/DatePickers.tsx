@@ -3,6 +3,7 @@ import ja from "date-fns/locale/ja";
 import format from "date-fns/format";
 import React, { VFC } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
+import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import {
   MuiPickersUtilsProvider,
@@ -19,23 +20,19 @@ class ExtendedUtils extends DateFnsUtils {
   }
 }
 export type Props={
-  open?: boolean
+
 }
 
 export const DatePickers:VFC<Props>=(props)=> {
-  const { open } = props
-  const onClickOK = ()=>(
-    axios
-    .get("https://google.com")
-    .then((res) => console.log(res))
-    .catch((e) => console.log(e))
-  )
+  const history = useHistory()
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(
     new Date(),
-  );
+    );
+  const onClickOK = ()=> history.push({pathname:"/registration", state: selectedDate})
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
+    console.log(date)
   };
   // The first commit of Material-UI
   return (
@@ -45,16 +42,14 @@ export const DatePickers:VFC<Props>=(props)=> {
           id="date"
           label="日付選択"
           okLabel="決定"
-          open={open}
           cancelLabel="キャンセル"
-          // open={false}
           format="yyyy/MM/dd"
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
             'aria-label': 'change date',
           }}
-          // onClick={onClickOK}
+          onAccept={onClickOK}
         />
     </MuiPickersUtilsProvider>
   );

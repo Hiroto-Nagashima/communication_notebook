@@ -19,7 +19,7 @@ function App() {
             <TopPage/>
           </Route>
           <Route exact path="/registration">
-            <RegistrationPage label="登録画面です"/>
+            <RegistrationPage/>
           </Route>
         </Switch>
       </BrowserRouter>

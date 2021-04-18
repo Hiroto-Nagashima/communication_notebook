@@ -5,6 +5,7 @@ import { MenuAppBar } from '../organisms/Header'
 import { Kid } from '../types/api/kid'
 import { CircularDeterminate } from '../atoms/Spinner'
 import { useLocation } from 'react-router-dom'
+import { DatePickers } from "../atoms/DatePickers";
 
 type Props={
 }
@@ -46,6 +47,7 @@ export const TopPage:VFC<Props>=(props)=>{
           name={result?.name}
           daycare_name={result?.daycare_name}
         />
+        <DatePickers/>
       </>
       )
     }

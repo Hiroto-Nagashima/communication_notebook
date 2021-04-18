@@ -12,7 +12,7 @@ import { VFC } from 'react';
 import styled from 'styled-components'
 
 export type Props={
-  selectedDate: string
+  selectedDate: string | Object
 }
 export const InputOfNotebook:VFC<Props>=(props)=> {
   const { selectedDate }= props

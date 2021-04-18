@@ -6,8 +6,18 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
     else
       render json: {
         status: 400,
-        message; "未入力箇所があります"
+        message: "未入力箇所があります"
         },status: 400
+    end
+  end
+
+  def index
+    if communication_notebook = CommunicationNotebook.find_by(created_at: params[:date])
+      render json: communication_notebook
+    else
+      @communication_notebook= CommunicationNotebook.new
+      render json: @communication_notebook
+    end
   end
   private
 
