@@ -1,24 +1,22 @@
-import React, { VFC } from 'react';
+import React, { VFC, ChangeEvent } from 'react';
 import TextField from '@material-ui/core/TextField';
 
 export type Props={
   label: string
   row: number
+  value: string
+  onChange:(e: ChangeEvent<HTMLInputElement>)=>void
 }
 
 // 列の指定ができるTextarea
 export const MultilineTextField:VFC<Props>=(props)=> {
-  const { label,row } = props
-  const [value, setValue] = React.useState('');
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
+  const { label,row, value, onChange } = props
 
   return (
     <TextField
     id="outlined-multiline-static"
     value={value}
-    onChange={handleChange}
+    onChange={onChange}
     label={label}
     multiline
     rows={row}

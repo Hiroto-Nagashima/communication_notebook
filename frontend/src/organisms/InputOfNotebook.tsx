@@ -8,14 +8,20 @@ import { SimpleMenu } from '../molecules/Menu';
 import { MultilineTextField } from '../atoms/TextArea';
 import { DraggableDialog } from '../molecules/DraggableDialog';
 import { RadioButtonsGroup } from '../molecules/RadioButtonsGroup';
-import { VFC } from 'react';
+import { VFC, ChangeEvent } from 'react';
 import styled from 'styled-components'
 
 export type Props={
   selectedDate: string | Object
+  dinner:string
+  breakfast:string
+  memo:string
+  onChangeDinner:(e: ChangeEvent<HTMLInputElement>)=>void
+  onChangeBreakfast:(e: ChangeEvent<HTMLInputElement>)=>void
+  onChangeMemo:(e: ChangeEvent<HTMLInputElement>)=>void
 }
 export const InputOfNotebook:VFC<Props>=(props)=> {
-  const { selectedDate }= props
+  const { selectedDate, dinner, breakfast, memo, onChangeDinner, onChangeBreakfast, onChangeMemo  }= props
   // const SContainer = styled(Container)`
   //   display: grid;
   // `
@@ -41,13 +47,13 @@ export const InputOfNotebook:VFC<Props>=(props)=> {
               <SimpleMenu options={["悪い", "普通", "良い"]} label="機嫌"/>
             </Grid>
             <Grid item xs={12} >
-              <MultilineTextField label="夕食" row={4}/>
+              <MultilineTextField label="夕食" row={4} value={dinner} onChange={onChangeDinner}/>
             </Grid>
             <Grid item xs={12} >
-              <MultilineTextField label="朝食" row={4}/>
+              <MultilineTextField label="朝食" row={4} value={breakfast} onChange={onChangeBreakfast}/>
             </Grid>
             <Grid item xs={12} >
-              <MultilineTextField label="連絡事項" row={4}/>
+              <MultilineTextField label="連絡事項" row={4} value={memo} onChange={onChangeMemo}/>
             </Grid>
             <Grid item xs={12} >
               <DraggableDialog
