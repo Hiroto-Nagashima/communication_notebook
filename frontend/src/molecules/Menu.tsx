@@ -10,11 +10,17 @@ const options = [
   'Hide sensitive notification content',
   'Hide all notification content',
 ];
+const Options = {
+  0: "悪い",
+  1: "普通" ,
+  2: "良い"
+} as const;
+type Options = typeof Options[keyof typeof Options];
+
 export type Props={
-  options:Array<string>
+  options: Array<Options>
   label:string
 }
-
 
 export const SimpleMenu:VFC<Props>=(props)=> {
   const{ options, label} = props
@@ -26,6 +32,7 @@ export const SimpleMenu:VFC<Props>=(props)=> {
   const handleMenuItemClick = (event: React.MouseEvent<HTMLElement>, index: number) => {
     setSelectedIndex(index);
     setAnchorEl(null);
+    console.log(event.currentTarget)
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
