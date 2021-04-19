@@ -34,17 +34,17 @@ export const RegistrationPage:VFC<Props>=(props)=>{
     const body_temperature_value:number = Number(e.target.value);
     setBodyTemperature(body_temperature_value)
   }
-//以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている
+//以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<string>()
-//ここまで
+//ここまで。
   const fetchUser =()=>(
     axios
     .get<Kid>(`http://localhost:3000/api/v1/communication_notebooks?date=${state}`)
     .then((res)=>
-    //推定エラー発生箇所
+    //推定エラー発生箇所。
       setResult(res.data)
     )
-    //ここまで
+    //ここまで。
     .catch((e)=> setError(e))
     .finally(() => setLoading(false))
   )
