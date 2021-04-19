@@ -9,6 +9,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 
 
 class ExtendedUtils extends DateFnsUtils {
@@ -25,16 +26,24 @@ export type Props={
 
 export const DatePickers:VFC<Props>=(props)=> {
   const history = useHistory()
-  const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-    new Date(),
-    );
-  const onClickOK = ()=> history.push({pathname:"/registration", state: selectedDate})
+  const [selectedDate, setSelectedDate] = React.useState<Date |string| null>(null);
 
-  const handleDateChange = (date: Date | null) => {
+    const createNewDate=(props: string | number | Date ) =>{
+      const date = new Date(props)
+      const target_date= date.getDate() + "-" +  (date.getMonth() + 1)  + "-" +  date.getFullYear()
+      setSelectedDate(target_date)
+    }
+
+    const onClickOK = ()=>{
+      history.push({pathname:"/registration", state: selectedDate})
+      return (console.log(selectedDate))
+    }
+
+  const handleDateChange = (date: MaterialUiPickersDate) => {
+    createNewDate(date!)
     setSelectedDate(date);
     console.log(date)
   };
-  // The first commit of Material-UI
   return (
     <MuiPickersUtilsProvider locale={ja} utils={ExtendedUtils}>
       <KeyboardDatePicker

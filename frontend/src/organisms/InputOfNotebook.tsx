@@ -13,14 +13,16 @@ import styled from 'styled-components'
 
 export type Props={
   selectedDate: string | Object
-  dinner:string
-  breakfast:string
-  memo:string
+  dinner:string | null
+  breakfast:string | null
+  memo: string | null
   body_temperature: number | null
+  bath: string | null
   onChangeDinner:(e: ChangeEvent<HTMLInputElement>)=>void
   onChangeBreakfast:(e: ChangeEvent<HTMLInputElement>)=>void
   onChangeMemo:(e: ChangeEvent<HTMLInputElement>)=>void
   onChangeBodyTemperature:(e: ChangeEvent<HTMLInputElement>)=>void
+  onChangeBath:(e: ChangeEvent<HTMLInputElement>)=>void
 }
 export const InputOfNotebook:VFC<Props>=(props)=> {
   const {
@@ -29,10 +31,12 @@ export const InputOfNotebook:VFC<Props>=(props)=> {
     breakfast,
     memo,
     body_temperature,
+    bath,
     onChangeDinner,
     onChangeBreakfast,
     onChangeMemo,
-    onChangeBodyTemperature
+    onChangeBodyTemperature,
+    onChangeBath
   }= props
 
   return (
@@ -50,7 +54,7 @@ export const InputOfNotebook:VFC<Props>=(props)=> {
                 <ComposedTextField textName="体温" placeholder="36.x" value={body_temperature} onChange={onChangeBodyTemperature}/>
               </Grid>
               <Grid item xs={5} >
-                <RadioButtonsGroup title="入浴" labels={["有", "無"]}/>
+                <RadioButtonsGroup title="入浴" labels={["有", "無"]} value={bath} onChange={onChangeBath}/>
               </Grid>
             </Grid>
             <Grid item xs={12} >
