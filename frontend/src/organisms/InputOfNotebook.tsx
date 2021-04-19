@@ -16,15 +16,25 @@ export type Props={
   dinner:string
   breakfast:string
   memo:string
+  body_temperature: number | null
   onChangeDinner:(e: ChangeEvent<HTMLInputElement>)=>void
   onChangeBreakfast:(e: ChangeEvent<HTMLInputElement>)=>void
   onChangeMemo:(e: ChangeEvent<HTMLInputElement>)=>void
+  onChangeBodyTemperature:(e: ChangeEvent<HTMLInputElement>)=>void
 }
 export const InputOfNotebook:VFC<Props>=(props)=> {
-  const { selectedDate, dinner, breakfast, memo, onChangeDinner, onChangeBreakfast, onChangeMemo  }= props
-  // const SContainer = styled(Container)`
-  //   display: grid;
-  // `
+  const {
+    selectedDate,
+    dinner,
+    breakfast,
+    memo,
+    body_temperature,
+    onChangeDinner,
+    onChangeBreakfast,
+    onChangeMemo,
+    onChangeBodyTemperature
+  }= props
+
   return (
     <>
       <Container maxWidth="xs" style={{ backgroundColor: '#D9E5FF', height: '800px' }}>
@@ -37,7 +47,7 @@ export const InputOfNotebook:VFC<Props>=(props)=> {
             </Grid>
             <Grid container justify="space-between">
               <Grid item xs={5} >
-                <ComposedTextField textName="体温" placeholder="36.x"/>
+                <ComposedTextField textName="体温" placeholder="36.x" value={body_temperature} onChange={onChangeBodyTemperature}/>
               </Grid>
               <Grid item xs={5} >
                 <RadioButtonsGroup title="入浴" labels={["有", "無"]}/>

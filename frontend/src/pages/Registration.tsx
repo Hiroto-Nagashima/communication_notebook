@@ -13,18 +13,28 @@ export const RegistrationPage:VFC<Props>=(props)=>{
   const [result, setResult] = useState<Kid | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+
   const [dinner, setDinner] = useState('');
   const handleDinnerChange = (e:ChangeEvent<HTMLInputElement>) => {
     setDinner(e.target.value);
   }
+
   const [breakfast, setBreakfast] = useState('');
   const handleBreakfastChange = (e:ChangeEvent<HTMLInputElement>) => {
     setDinner(e.target.value);
   }
+
   const [memo, setMemo] = useState('');
   const handleMemoChange = (e:ChangeEvent<HTMLInputElement>) => {
     setDinner(e.target.value);
   }
+
+  const [bodyTemperature, setBodyTemperature] = useState<number | null>(null);
+  const handleBodyTemperatureChange = (e:ChangeEvent<HTMLInputElement>) => {
+    const body_temperature_value:number = Number(e.target.value);
+    setBodyTemperature(body_temperature_value)
+  }
+
   const { state } = useLocation<string>()
 
   const fetchUser =()=>(
@@ -65,6 +75,8 @@ export const RegistrationPage:VFC<Props>=(props)=>{
           onChangeBreakfast={handleBreakfastChange}
           memo={memo}
           onChangeMemo={handleMemoChange}
+          body_temperature={bodyTemperature}
+          onChangeBodyTemperature={handleBodyTemperatureChange}
           />
       </>
       )
