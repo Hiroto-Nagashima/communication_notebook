@@ -1,50 +1,65 @@
 import axios from "axios";
-import { useEffect, useState, ChangeEvent, VFC } from "react";
-import { MenuAppBar } from '../organisms/Header'
-import { Kid } from '../types/api/kid'
+import { useEffect, useState, ChangeEvent, VFC, memo, useCallback } from "react";
 import { CircularDeterminate } from '../atoms/Spinner'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { InputOfNotebook } from "../organisms/InputOfNotebook";
+import { CommunicationNotebook } from "../types/api/communication_notebook";
 
-type Props={
-}
-export const RegistrationPage:VFC<Props>=(props)=>{
-  const { } = props
-  const [result, setResult] = useState<Kid | null>(null)
+export const RegistrationPage:VFC= memo(()=>{
+  const [result, setResult] = useState<CommunicationNotebook>({
+    id: null,
+    daycare_id: null,
+    body_temperature: null,
+    mood: null,
+    bath: null,
+    breakfast: null,
+    dinner: null,
+    memo: null
+  })
+
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
-  const [dinner, setDinner] = useState('');
+  const [dinner, setDinner] = useState<string | null>(result.dinner);
   const handleDinnerChange = (e:ChangeEvent<HTMLInputElement>) => {
     setDinner(e.target.value);
+    console.log("1")
   }
 
-  const [breakfast, setBreakfast] = useState('');
+  const [breakfast, setBreakfast] = useState<string | null>(result.breakfast);
   const handleBreakfastChange = (e:ChangeEvent<HTMLInputElement>) => {
-    setDinner(e.target.value);
+    setBreakfast(e.target.value);
+    console.log("2")
   }
 
-  const [memo, setMemo] = useState('');
-  const handleMemoChange = (e:ChangeEvent<HTMLInputElement>) => {
-    setDinner(e.target.value);
-  }
+  const [memo, setMemo] = useState<string | null>(result.memo);
+  const handleMemoChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
+    setMemo(e.target.value);
+  }, [])
 
-  const [bodyTemperature, setBodyTemperature] = useState<number | null>(null);
+  const [bodyTemperature, setBodyTemperature] = useState<number |string|  null>(result.body_temperature);
   const handleBodyTemperatureChange = (e:ChangeEvent<HTMLInputElement>) => {
-    const body_temperature_value:number = Number(e.target.value);
-    setBodyTemperature(body_temperature_value)
+    setBodyTemperature(e.target.value);
   }
-//以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている
+
+  const [ bath, setBath] = useState<string | null>("有");
+
+  const handleBathChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
+    setBath((e.target as HTMLInputElement).value);
+    console.log(bath)
+  },[bath]);
+//以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<string>()
-//ここまで
+
+//ここまで。
   const fetchUser =()=>(
     axios
-    .get<Kid>(`http://localhost:3000/api/v1/communication_notebooks?date=${state}`)
+    .get<CommunicationNotebook>(`http://localhost:3000/api/v1/communication_notebooks`)
     .then((res)=>
-    //推定エラー発生箇所
+    //推定エラー発生箇所。
       setResult(res.data)
     )
-    //ここまで
+    //ここまで。
     .catch((e)=> setError(e))
     .finally(() => setLoading(false))
   )
@@ -60,15 +75,6 @@ export const RegistrationPage:VFC<Props>=(props)=>{
         <h1>エラー</h1>
       ):(
       <>
-        <MenuAppBar
-          title="NoteBook"
-          iconColor="inherit"
-          barColor="primary"
-          auth= {true}
-          // kid={{kid_name: `${result?.kid_name}`, nursery_name: `${result?.nursery_name}`}}
-          name={result?.name}
-          daycare_name={result?.daycare_name}
-        />
         <InputOfNotebook
           selectedDate={ state }
           dinner={dinner}
@@ -77,6 +83,8 @@ export const RegistrationPage:VFC<Props>=(props)=>{
           onChangeBreakfast={handleBreakfastChange}
           memo={memo}
           onChangeMemo={handleMemoChange}
+          bath={bath}
+          onChangeBath={handleBathChange}
           body_temperature={bodyTemperature}
           onChangeBodyTemperature={handleBodyTemperatureChange}
           />
@@ -85,4 +93,4 @@ export const RegistrationPage:VFC<Props>=(props)=>{
     }
     </>
   )
-}
+})

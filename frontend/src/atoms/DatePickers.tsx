@@ -1,14 +1,15 @@
 import 'date-fns';
 import ja from "date-fns/locale/ja";
 import format from "date-fns/format";
-import React, { VFC } from 'react';
+import React,{ VFC, memo } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import { useHistory } from 'react-router-dom'
-import axios from 'axios';
+
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 
 
 class ExtendedUtils extends DateFnsUtils {
@@ -19,22 +20,27 @@ class ExtendedUtils extends DateFnsUtils {
     return format(date, "MMMd日", { locale: this.locale });
   }
 }
-export type Props={
 
-}
 
-export const DatePickers:VFC<Props>=(props)=> {
+export const DatePickers:VFC=memo(()=> {
   const history = useHistory()
-  const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-    new Date(),
-    );
-  const onClickOK = ()=> history.push({pathname:"/registration", state: selectedDate})
+  const [selectedDate, setSelectedDate] = React.useState<Date |string| null>(null);
 
-  const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date);
+    const createNewDate=(props: string | number | Date ) =>{
+      const date = new Date(props)
+      // const target_date= date.getDate() + "-" +  (date.getMonth() + 1)  + "-" +  date.getFullYear()
+      setSelectedDate(date)
+    }
+
+    const onClickOK = ()=>{
+      history.push({pathname:"/registration", state: selectedDate})
+      return (console.log(selectedDate))
+    }
+
+  const handleDateChange = (date: MaterialUiPickersDate) => {
+    createNewDate(date!)
     console.log(date)
   };
-  // The first commit of Material-UI
   return (
     <MuiPickersUtilsProvider locale={ja} utils={ExtendedUtils}>
       <KeyboardDatePicker
@@ -53,4 +59,4 @@ export const DatePickers:VFC<Props>=(props)=> {
         />
     </MuiPickersUtilsProvider>
   );
-}
+})

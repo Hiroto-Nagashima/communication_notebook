@@ -14,7 +14,7 @@ const Template: Story<Props> = (args) => <MultilineTextField {...args} />;
 export const Memo = (args:Props)=>(
   <Grid container>
     <Grid item xs={6}>
-      <MultilineTextField label="連絡事項" row={4}/>
+      <MultilineTextField  label="連絡事項" row={4}/>
     </Grid>
   </Grid>
 );

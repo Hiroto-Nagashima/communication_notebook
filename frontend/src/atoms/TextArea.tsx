@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 export type Props={
   label: string
   row: number
-  value?: string
+  value?: string | null
   onChange?:(e: ChangeEvent<HTMLInputElement>)=>void
 }
 
