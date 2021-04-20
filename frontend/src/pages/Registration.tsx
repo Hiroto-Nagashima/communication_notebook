@@ -48,6 +48,21 @@ export const RegistrationPage:VFC= memo(()=>{
     setBath((e.target as HTMLInputElement).value);
     console.log(bath)
   },[bath]);
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const [selectedIndex, setSelectedIndex] = useState<number>(1);
+  const handleMenuItemClick = (event: React.MouseEvent<HTMLElement>, index: number) => {
+    setSelectedIndex(index);
+    setAnchorEl(null);
+    console.log(selectedIndex)
+  };
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<string>()
 
@@ -87,6 +102,11 @@ export const RegistrationPage:VFC= memo(()=>{
           onChangeBath={handleBathChange}
           body_temperature={bodyTemperature}
           onChangeBodyTemperature={handleBodyTemperatureChange}
+          anchorEl={anchorEl}
+          index={selectedIndex}
+          onClose={handleClose}
+          onClickMenu={handleMenuItemClick}
+          onClickButton={handleClick}
           />
       </>
       )

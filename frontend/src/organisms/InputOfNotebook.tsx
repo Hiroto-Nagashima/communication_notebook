@@ -4,11 +4,11 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import 'date-fns';
 import { ComposedTextField } from '../atoms/TextField';
-import { SimpleMenu } from '../molecules/Menu';
+import { SimpleMenu } from '../molecules/SimpleMenu';
 import { MultilineTextField } from '../atoms/TextArea';
 import { DraggableDialog } from '../molecules/DraggableDialog';
 import { RadioButtonsGroup } from '../molecules/RadioButtonsGroup';
-import { VFC, ChangeEvent, memo } from 'react';
+import { VFC, ChangeEvent, memo, MouseEventHandler} from 'react';
 
 
 export type Props={
@@ -18,11 +18,16 @@ export type Props={
   memo: string | null
   body_temperature: number | string|  null
   bath: string | null
+  index: number
+  anchorEl: HTMLElement | null
+  onClose: ()=>void
   onChangeDinner:(e: ChangeEvent<HTMLInputElement>)=>void
   onChangeBreakfast:(e: ChangeEvent<HTMLInputElement>)=>void
   onChangeMemo:(e: ChangeEvent<HTMLInputElement>)=>void
   onChangeBodyTemperature:(e: ChangeEvent<HTMLInputElement>)=>void
   onChangeBath:(e: ChangeEvent<HTMLInputElement>)=>void
+  onClickMenu:(event: React.MouseEvent<HTMLElement>, index: number) => void
+  onClickButton:MouseEventHandler<HTMLButtonElement>
 }
 export const InputOfNotebook:VFC<Props>=memo((props)=> {
   const {
@@ -32,11 +37,16 @@ export const InputOfNotebook:VFC<Props>=memo((props)=> {
     memo,
     body_temperature,
     bath,
+    index,
+    anchorEl,
     onChangeDinner,
     onChangeBreakfast,
     onChangeMemo,
     onChangeBodyTemperature,
-    onChangeBath
+    onChangeBath,
+    onClickMenu,
+    onClose,
+    onClickButton
   }= props
 
   return (
@@ -58,7 +68,7 @@ export const InputOfNotebook:VFC<Props>=memo((props)=> {
               </Grid>
             </Grid>
             <Grid item xs={12} >
-              <SimpleMenu options={["悪い", "普通", "良い"]} label="機嫌"/>
+              <SimpleMenu Index={index} onClickMenuItem={onClickMenu} anchorEl={anchorEl} onClose={onClose} onClickButton={onClickButton}/>
             </Grid>
             <Grid item xs={12} >
               <MultilineTextField label="夕食" row={4} value={dinner} onChange={onChangeDinner}/>

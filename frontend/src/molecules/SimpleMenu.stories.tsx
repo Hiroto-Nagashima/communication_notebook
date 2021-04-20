@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { Props, SimpleMenu } from './Menu';
+import { Props, SimpleMenu } from './SimpleMenu';
 
 
 export default {
@@ -23,10 +23,7 @@ const Template: Story<Props> = (args) => <SimpleMenu {...args} />;
 
 export const Mood = Template.bind({});
 Mood.args = {
-  options: [
-    "悪い", "普通", "良い"
-  ],
-  label: "機嫌"
+
 };
 
 
