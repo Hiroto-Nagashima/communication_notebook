@@ -1,24 +1,14 @@
 import React, { VFC } from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import { Input } from '@material-ui/core';
+import { Button, Input, Menu, MenuItem } from '@material-ui/core';
 
-const options = [
-  '',
-  'Show all notification content',
-  'Hide sensitive notification content',
-  'Hide all notification content',
-];
-const Options = {
-  0: "悪い",
-  1: "普通" ,
-  2: "良い"
-} as const;
-type Options = typeof Options[keyof typeof Options];
+const OPTIONS = [
+  { value: 0, label: '悪い' },
+  { value: 1, label: '普通' },
+  { value: 2, label: '良い' },
+]
 
-export type Props={
-  options: Array<Options>
+ export type Props={
+  options: Array<string>
   label:string
 }
 
@@ -32,7 +22,7 @@ export const SimpleMenu:VFC<Props>=(props)=> {
   const handleMenuItemClick = (event: React.MouseEvent<HTMLElement>, index: number) => {
     setSelectedIndex(index);
     setAnchorEl(null);
-    console.log(event.currentTarget)
+    console.log(selectedIndex)
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

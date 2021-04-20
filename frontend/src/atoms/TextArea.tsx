@@ -4,8 +4,8 @@ import TextField from '@material-ui/core/TextField';
 export type Props={
   label: string
   row: number
-  value: string
-  onChange:(e: ChangeEvent<HTMLInputElement>)=>void
+  value?: string
+  onChange?:(e: ChangeEvent<HTMLInputElement>)=>void
 }
 
 // 列の指定ができるTextarea
