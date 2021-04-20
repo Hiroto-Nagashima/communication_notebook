@@ -6,9 +6,9 @@ import 'date-fns';
 import { ComposedTextField } from '../atoms/TextField';
 import { SimpleMenu } from '../molecules/SimpleMenu';
 import { MultilineTextField } from '../atoms/TextArea';
-import { DraggableDialog } from '../molecules/DraggableDialog';
 import { RadioButtonsGroup } from '../molecules/RadioButtonsGroup';
 import { VFC, ChangeEvent, memo, MouseEventHandler} from 'react';
+import { DraggableDialog } from '../molecules/DraggableDialog';
 
 
 export type Props={
@@ -20,6 +20,7 @@ export type Props={
   bath: string | null
   index: number
   anchorEl: HTMLElement | null
+  isOpen:boolean
   onClose: ()=>void
   onChangeDinner:(e: ChangeEvent<HTMLInputElement>)=>void
   onChangeBreakfast:(e: ChangeEvent<HTMLInputElement>)=>void
@@ -28,6 +29,9 @@ export type Props={
   onChangeBath:(e: ChangeEvent<HTMLInputElement>)=>void
   onClickMenu:(event: React.MouseEvent<HTMLElement>, index: number) => void
   onClickButton:MouseEventHandler<HTMLButtonElement>
+  onClickRegister:()=>void
+  onClickDialogClose:()=>void
+  onClickDialogOpen:()=>void
 }
 export const InputOfNotebook:VFC<Props>=memo((props)=> {
   const {
@@ -39,6 +43,7 @@ export const InputOfNotebook:VFC<Props>=memo((props)=> {
     bath,
     index,
     anchorEl,
+    isOpen,
     onChangeDinner,
     onChangeBreakfast,
     onChangeMemo,
@@ -46,7 +51,10 @@ export const InputOfNotebook:VFC<Props>=memo((props)=> {
     onChangeBath,
     onClickMenu,
     onClose,
-    onClickButton
+    onClickButton,
+    onClickRegister,
+    onClickDialogClose,
+    onClickDialogOpen
   }= props
 
   return (
@@ -80,13 +88,7 @@ export const InputOfNotebook:VFC<Props>=memo((props)=> {
               <MultilineTextField label="連絡事項" row={4} value={memo} onChange={onChangeMemo}/>
             </Grid>
             <Grid item xs={12} >
-              <DraggableDialog
-                dialogContentText="この内容で登録しますか？"
-                dialogTitle="登録確認"
-                buttonLabel="登録"
-                cancelButtonLabel= "戻る"
-                submitButtonLabel= "登録"
-              />
+              <DraggableDialog isOpen={isOpen} onClickClose={onClickDialogClose} onClickOpen={onClickDialogOpen} onClickRegister={onClickRegister}/>
             </Grid>
           </Grid>
         </Box>

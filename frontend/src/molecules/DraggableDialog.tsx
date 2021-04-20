@@ -16,50 +16,40 @@ function PaperComponent(props: PaperProps) {
   );
 }
 export type Props={
-  buttonLabel: string
-  dialogContentText: string
-  submitButtonLabel: string
-  cancelButtonLabel: string
-  dialogTitle: string
+  onClickClose:()=>void
+  onClickOpen:()=>void
+  onClickRegister:()=>void
+  isOpen: boolean
 }
 
 export const DraggableDialog:VFC<Props>=(props)=> {
-  const { buttonLabel, dialogContentText, submitButtonLabel, cancelButtonLabel, dialogTitle} = props
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const { isOpen, onClickOpen, onClickClose, onClickRegister} = props
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        {buttonLabel}
+      <Button variant="outlined" color="primary" onClick={onClickOpen}>
+        登録
       </Button>
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={isOpen}
+        onClose={onClickClose}
         PaperComponent={PaperComponent}
         aria-labelledby="draggable-dialog-title"
       >
         <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-        { dialogTitle }
+          登録確認
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            { dialogContentText }
+            この内容で登録しますか？
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            { submitButtonLabel }
+          <Button onClick={onClickClose} color="primary">
+            戻る
           </Button>
-          <Button onClick={handleClose} color="primary">
-            { cancelButtonLabel }
+          <Button autoFocus onClick={onClickRegister} color="primary">
+            登録
           </Button>
         </DialogActions>
       </Dialog>

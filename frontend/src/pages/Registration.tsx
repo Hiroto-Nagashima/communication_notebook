@@ -63,6 +63,20 @@ export const RegistrationPage:VFC= memo(()=>{
     setAnchorEl(null);
     console.log(selectedIndex)
   };
+
+  const [open, setOpen] = useState(false);
+
+  const handleDialogOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpen(false);
+  };
+
+  const handleClickRegister=() =>{
+
+  }
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<string>()
 
@@ -107,6 +121,10 @@ export const RegistrationPage:VFC= memo(()=>{
           onClose={handleClose}
           onClickMenu={handleMenuItemClick}
           onClickButton={handleClick}
+          isOpen={open}
+          onClickDialogClose={handleDialogClose}
+          onClickDialogOpen={handleDialogOpen}
+          onClickRegister={handleClickRegister}
           />
       </>
       )

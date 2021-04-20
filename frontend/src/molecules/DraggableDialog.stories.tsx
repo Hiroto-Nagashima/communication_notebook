@@ -21,11 +21,7 @@ const Template: Story<Props> = (args) => <DraggableDialog {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  dialogContentText:"この内容で登録しますか？",
-  dialogTitle: "登録確認",
-  buttonLabel: "登録",
-  cancelButtonLabel: "戻る",
-  submitButtonLabel: "登録"
+
 };
 
 
