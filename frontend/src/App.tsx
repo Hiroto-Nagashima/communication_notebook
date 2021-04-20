@@ -3,6 +3,7 @@ import { TopPage } from './pages/Top';
 import { RegistrationPage } from './pages/Registration';
 import { LoginPage } from './pages/Login';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { UserProvider } from './provider/UserProvider';
 
 
 
@@ -10,6 +11,7 @@ function App() {
   return (
     <>
   {/* router関連のコンポーネントをBrowserRouterの中に全て記入 */}
+    <UserProvider>
       <BrowserRouter>
         <Switch>
           <Route exact path="/login">
@@ -23,6 +25,7 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
+    </UserProvider>
     </>
   );
 }

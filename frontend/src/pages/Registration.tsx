@@ -75,7 +75,12 @@ export const RegistrationPage:VFC= memo(()=>{
   };
 
   const handleClickRegister=() =>{
-
+    axios
+      .post("http://localhost:3000/api/v1/communication_notebooks",{
+        params:{
+          
+        }
+      })
   }
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<string>()

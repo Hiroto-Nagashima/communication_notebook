@@ -1,8 +1,9 @@
-import { ChangeEvent,useState, VFC } from "react";
+import { ChangeEvent,useContext,useState, VFC } from "react";
 import { LoginPaper } from '../organisms/LoginPaper'
 import { Footer } from '../organisms/Footer'
 import { Box, Button } from "@material-ui/core";
 import { useHistory } from 'react-router-dom'
+import { UserContext } from "../provider/UserProvider";
 type Props={
 
 }
@@ -14,7 +15,12 @@ export const LoginPage:VFC<Props>=(props)=>{
     const value:number = Number(e.target.value);
     setValue(value)
   }
-  const onClickButton=()=> history.push({pathname:"/", state:value})
+  const { setKidId } = useContext(UserContext)
+
+  const onClickButton=()=> {
+    setKidId!(value)
+    history.push({pathname:"/"})
+}
   return (
     <>
     <Box mt={8}>

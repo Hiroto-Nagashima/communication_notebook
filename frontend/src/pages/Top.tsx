@@ -1,11 +1,12 @@
 import { Button } from "@material-ui/core";
 import axios from "axios";
-import { useEffect, useState, VFC } from "react";
+import { useContext, useEffect, useState, VFC } from "react";
 import { MenuAppBar } from '../organisms/Header'
 import { Kid } from '../types/api/kid'
 import { CircularDeterminate } from '../atoms/Spinner'
 import { useLocation } from 'react-router-dom'
 import { DatePickers } from "../atoms/DatePickers";
+import { UserContext } from "../provider/UserProvider";
 
 type Props={
 }
@@ -14,11 +15,10 @@ export const TopPage:VFC<Props>=(props)=>{
   const [result, setResult] = useState<Kid | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
-  const { state } = useLocation()
-
+  const { kidId } = useContext(UserContext)
   const fetchUser =()=>(
     axios
-    .get<Kid>(`http://localhost:3000/api/v1/kids/${state}`)
+    .get<Kid>(`http://localhost:3000/api/v1/kids/${kidId}`)
     .then((res)=> {
       setResult(res.data)
       console.log(result)
