@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_16_020628) do
+ActiveRecord::Schema.define(version: 2021_04_20_064010) do
 
   create_table "communication_notebooks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "bodyTemperature"
-    t.boolean "hasBathed"
     t.integer "mood"
     t.text "breakfast"
     t.text "dinner"
     t.text "memo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "bath"
   end
 
   create_table "kids", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
