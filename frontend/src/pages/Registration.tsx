@@ -1,16 +1,11 @@
 import axios from "axios";
-import { useEffect, useState, ChangeEvent, VFC } from "react";
-import { MenuAppBar } from '../organisms/Header'
-import { Kid } from '../types/api/kid'
+import { useEffect, useState, ChangeEvent, VFC, memo, useCallback } from "react";
 import { CircularDeterminate } from '../atoms/Spinner'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { InputOfNotebook } from "../organisms/InputOfNotebook";
 import { CommunicationNotebook } from "../types/api/communication_notebook";
 
-type Props={
-}
-export const RegistrationPage:VFC<Props>=(props)=>{
-  const { } = props
+export const RegistrationPage:VFC= memo(()=>{
   const [result, setResult] = useState<CommunicationNotebook>({
     id: null,
     daycare_id: null,
@@ -25,33 +20,34 @@ export const RegistrationPage:VFC<Props>=(props)=>{
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
-  const [dinner, setDinner] = useState<string | null>(result!.dinner);
+  const [dinner, setDinner] = useState<string | null>(result.dinner);
   const handleDinnerChange = (e:ChangeEvent<HTMLInputElement>) => {
     setDinner(e.target.value);
+    console.log("1")
   }
 
-  const [breakfast, setBreakfast] = useState('');
+  const [breakfast, setBreakfast] = useState<string | null>(result.breakfast);
   const handleBreakfastChange = (e:ChangeEvent<HTMLInputElement>) => {
-    setDinner(e.target.value);
+    setBreakfast(e.target.value);
+    console.log("2")
   }
 
-  const [memo, setMemo] = useState('');
-  const handleMemoChange = (e:ChangeEvent<HTMLInputElement>) => {
-    setDinner(e.target.value);
-  }
+  const [memo, setMemo] = useState<string | null>(result.memo);
+  const handleMemoChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
+    setMemo(e.target.value);
+  }, [])
 
-  const [bodyTemperature, setBodyTemperature] = useState<number | null>(null);
+  const [bodyTemperature, setBodyTemperature] = useState<number |string|  null>(result.body_temperature);
   const handleBodyTemperatureChange = (e:ChangeEvent<HTMLInputElement>) => {
-    const body_temperature_value:number = Number(e.target.value);
-    setBodyTemperature(body_temperature_value)
+    setBodyTemperature(e.target.value);
   }
 
-  const [ bath, setBath] = useState<string>("有");
+  const [ bath, setBath] = useState<string | null>("有");
 
-  const handleBathChange = (e:ChangeEvent<HTMLInputElement>) => {
+  const handleBathChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setBath((e.target as HTMLInputElement).value);
     console.log(bath)
-  };
+  },[bath]);
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<string>()
 
@@ -97,4 +93,4 @@ export const RegistrationPage:VFC<Props>=(props)=>{
     }
     </>
   )
-}
+})

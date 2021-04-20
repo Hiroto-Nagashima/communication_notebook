@@ -8,15 +8,15 @@ import { SimpleMenu } from '../molecules/Menu';
 import { MultilineTextField } from '../atoms/TextArea';
 import { DraggableDialog } from '../molecules/DraggableDialog';
 import { RadioButtonsGroup } from '../molecules/RadioButtonsGroup';
-import { VFC, ChangeEvent } from 'react';
-import styled from 'styled-components'
+import { VFC, ChangeEvent, memo } from 'react';
+
 
 export type Props={
-  selectedDate: string | Object
+  selectedDate: string
   dinner:string | null
   breakfast:string | null
   memo: string | null
-  body_temperature: number | null
+  body_temperature: number | string|  null
   bath: string | null
   onChangeDinner:(e: ChangeEvent<HTMLInputElement>)=>void
   onChangeBreakfast:(e: ChangeEvent<HTMLInputElement>)=>void
@@ -24,7 +24,7 @@ export type Props={
   onChangeBodyTemperature:(e: ChangeEvent<HTMLInputElement>)=>void
   onChangeBath:(e: ChangeEvent<HTMLInputElement>)=>void
 }
-export const InputOfNotebook:VFC<Props>=(props)=> {
+export const InputOfNotebook:VFC<Props>=memo((props)=> {
   const {
     selectedDate,
     dinner,
@@ -54,7 +54,7 @@ export const InputOfNotebook:VFC<Props>=(props)=> {
                 <ComposedTextField textName="体温" placeholder="36.x" value={body_temperature} onChange={onChangeBodyTemperature}/>
               </Grid>
               <Grid item xs={5} >
-                <RadioButtonsGroup title="入浴" labels={["有", "無"]} value={bath} onChange={onChangeBath}/>
+                <RadioButtonsGroup title="入浴" labels={["有", "無"]} value={ bath } onChange={onChangeBath}/>
               </Grid>
             </Grid>
             <Grid item xs={12} >
@@ -83,4 +83,4 @@ export const InputOfNotebook:VFC<Props>=(props)=> {
       </Container>
     </>
   );
-}
+})
