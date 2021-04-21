@@ -1,8 +1,9 @@
 class Api::V1::CommunicationNotebooksController < ApplicationController
   def create
-    @communication_notebook = Communication_notebook.new(communication_notebook_params)
-    if @communication_notebook.save
-      render json: {},status: ok
+    @kid = Kid.find(params[:kid_id])
+    @communication_notebook = @kid.communication_notebooks.build(communication_notebook_params)
+    if @communication_notebook.save!
+      render json: {}
     else
       render json: {
         status: 400,
@@ -22,6 +23,6 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
   private
 
   def communication_notebook_params
-    params.require(:communication_notebook).permit(:bodyTemperature, :hasBathed, :mood, :breakfast, :dinner, :memo)
+    params.require(:communication_notebook).permit(:bodyTemperature, :bath, :mood, :breakfast, :dinner, :memo)
   end
 end

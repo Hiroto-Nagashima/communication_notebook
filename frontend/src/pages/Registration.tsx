@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useEffect, useState, ChangeEvent, VFC, memo, useCallback } from "react";
+import { useEffect, useState, ChangeEvent, VFC, memo, useCallback, useContext } from "react";
 import { CircularDeterminate } from '../atoms/Spinner'
-import { useLocation, useParams } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { InputOfNotebook } from "../organisms/InputOfNotebook";
 import { CommunicationNotebook } from "../types/api/communication_notebook";
+import { UserContext } from "../provider/UserProvider";
 
 export const RegistrationPage:VFC= memo(()=>{
   const [result, setResult] = useState<CommunicationNotebook>({
@@ -73,14 +74,25 @@ export const RegistrationPage:VFC= memo(()=>{
   const handleDialogClose = () => {
     setOpen(false);
   };
-
+  const { kidId } = useContext(UserContext)
+  const history = useHistory()
   const handleClickRegister=() =>{
     axios
-      .post("http://localhost:3000/api/v1/communication_notebooks",{
-        params:{
-          
+      .post(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`,{
+        communication_notebook:{
+          bodyTemperature: bodyTemperature,
+          mood: selectedIndex,
+          bath: bath,
+          breakfast: breakfast,
+          dinner: dinner,
+          memo: memo
         }
       })
+      .then((res)=>{
+        history.push("/")
+        console.log(res.data)
+      })
+      .catch((e)=>console.log(e))
   }
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<string>()
@@ -88,7 +100,7 @@ export const RegistrationPage:VFC= memo(()=>{
 //ここまで。
   const fetchUser =()=>(
     axios
-    .get<CommunicationNotebook>(`http://localhost:3000/api/v1/communication_notebooks`)
+    .get<CommunicationNotebook>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`)
     .then((res)=>
     //推定エラー発生箇所。
       setResult(res.data)
