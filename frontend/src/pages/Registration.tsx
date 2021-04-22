@@ -11,7 +11,7 @@ export const RegistrationPage:VFC= memo(()=>{
     id: null,
     daycare_id: null,
     body_temperature: null,
-    mood: null,
+    mood: 1,
     bath: null,
     breakfast: null,
     dinner: null,
@@ -33,7 +33,7 @@ export const RegistrationPage:VFC= memo(()=>{
     console.log("2")
   }
 
-  const [memo, setMemo] = useState<string | null>(result.memo);
+  const [memo, setMemo] = useState<string>("");
   const handleMemoChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setMemo(e.target.value);
   }, [])
@@ -43,7 +43,7 @@ export const RegistrationPage:VFC= memo(()=>{
     setBodyTemperature(e.target.value);
   }
 
-  const [ bath, setBath] = useState<string | null>("有");
+  const [ bath, setBath] = useState<string | null>(result.bath);
 
   const handleBathChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setBath((e.target as HTMLInputElement).value);
@@ -58,7 +58,7 @@ export const RegistrationPage:VFC= memo(()=>{
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const [selectedIndex, setSelectedIndex] = useState<number>(1);
+  const [selectedIndex, setSelectedIndex] = useState<number>(result.mood);
   const handleMenuItemClick = (event: React.MouseEvent<HTMLElement>, index: number) => {
     setSelectedIndex(index);
     setAnchorEl(null);
@@ -89,7 +89,7 @@ export const RegistrationPage:VFC= memo(()=>{
         }
       })
       .then((res)=>{
-        history.push("/")
+        history.push({pathname: "/", state: "success"})
         console.log(res.data)
       })
       .catch((e)=>console.log(e))

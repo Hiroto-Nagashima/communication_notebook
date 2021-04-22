@@ -3,7 +3,9 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
     @kid = Kid.find(params[:kid_id])
     @communication_notebook = @kid.communication_notebooks.build(communication_notebook_params)
     if @communication_notebook.save!
-      render json: {}
+      render json: {
+        status: "ok"
+      }
     else
       render json: {
         status: 400,
