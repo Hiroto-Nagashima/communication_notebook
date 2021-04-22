@@ -1,18 +1,19 @@
-import { Button } from "@material-ui/core";
 import axios from "axios";
+import 'date-fns';
+import format from "date-fns/format";
 import { useContext, useEffect, useState, VFC } from "react";
 import { MenuAppBar } from '../organisms/Header'
 import { Kid } from '../types/api/kid'
 import { CircularDeterminate } from '../atoms/Spinner'
 import { useLocation } from 'react-router-dom'
-import { DatePickers } from "../atoms/DatePickers";
+import { DatePicker } from "../atoms/DatePicker";
 import { UserContext } from "../provider/UserProvider";
 import { SimpleAlerts } from "../atoms/Alert";
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
+import { useHistory } from 'react-router-dom'
 
-type Props={
-}
-export const TopPage:VFC<Props>=(props)=>{
-  const { } = props
+export const TopPage:VFC =()=>{
+
   const [result, setResult] = useState<Kid | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -20,6 +21,26 @@ export const TopPage:VFC<Props>=(props)=>{
   const [label, setLabel] = useState<string>("")
   const { kidId } = useContext(UserContext)
   const { state } = useLocation()
+  const [selectedDate, setSelectedDate] = useState<Date | string | null>(null);
+  const history = useHistory()
+
+  const createNewDate=(date: Date | string | number ) =>{
+      const newDate = format(new Date(date), 'MM/dd/yyyy')
+      // const targetDate= newDate.getDate() + "-" +  (newDate.getMonth() + 1)  + "-" +  newDate.getFullYear()
+      console.log(newDate)
+      setSelectedDate(newDate)
+      console.log(selectedDate)
+      return selectedDate
+    }
+  const onClickConfirm = ()=>{
+    history.push({pathname:"/registration", state: selectedDate})
+    console.log(selectedDate)
+  }
+
+  const handleDateChange = (date: MaterialUiPickersDate) => {
+    createNewDate(date!)
+    console.log(date)
+  };
   const fetchUser =()=>(
     axios
     .get<Kid>(`http://localhost:3000/api/v1/kids/${kidId}`)
@@ -57,7 +78,7 @@ export const TopPage:VFC<Props>=(props)=>{
           name={result?.name}
           daycare_name={result?.daycare_name}
         />
-        <DatePickers/>
+        <DatePicker onChangeDate={handleDateChange} onClickConfirm={onClickConfirm} selectedDate={selectedDate}/>
         <SimpleAlerts status={status} label={label} />
       </>
       )

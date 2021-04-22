@@ -98,15 +98,17 @@ export const RegistrationPage:VFC= memo(()=>{
   const { state } = useLocation<string>()
   console.log(state)
 
-//ここまで。
+
   const fetchUser =()=>(
     axios
     .get<CommunicationNotebook>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`)
-    .then((res)=>
-    //推定エラー発生箇所。
+    .then((res)=>{
       setResult(res.data)
+      console.log(result)
+
+    }
     )
-    //ここまで。
+
     .catch((e)=> setError(e))
     .finally(() => setLoading(false))
   )
