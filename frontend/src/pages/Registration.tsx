@@ -96,6 +96,7 @@ export const RegistrationPage:VFC= memo(()=>{
   }
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<string>()
+  console.log(state)
 
 //ここまで。
   const fetchUser =()=>(

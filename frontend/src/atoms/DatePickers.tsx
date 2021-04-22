@@ -28,13 +28,16 @@ export const DatePickers:VFC=memo(()=> {
 
     const createNewDate=(props: string | number | Date ) =>{
       const date = new Date(props)
-      // const target_date= date.getDate() + "-" +  (date.getMonth() + 1)  + "-" +  date.getFullYear()
-      setSelectedDate(date)
+      const target_date= date.getDate() + "-" +  (date.getMonth() + 1)  + "-" +  date.getFullYear()
+      console.log(target_date)
+      setSelectedDate(target_date)
+      console.log(selectedDate)
+      return selectedDate
     }
 
     const onClickOK = ()=>{
       history.push({pathname:"/registration", state: selectedDate})
-      return (console.log(selectedDate))
+      console.log(selectedDate)
     }
 
   const handleDateChange = (date: MaterialUiPickersDate) => {
