@@ -89,7 +89,7 @@ export const RegistrationPage:VFC= memo(()=>{
         }
       })
       .then((res)=>{
-        history.push({pathname: "/", state: "success"})
+        history.push({pathname: "/top", state: "success"})
         console.log(res.data)
       })
       .catch((e)=>console.log(e))

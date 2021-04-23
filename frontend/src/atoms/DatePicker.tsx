@@ -19,13 +19,12 @@ class ExtendedUtils extends DateFnsUtils {
   }
 }
 export type Props = {
-  onClickConfirm:()=>void
-  onChangeDate:(date: MaterialUiPickersDate)=>void
-  selectedDate: Date | string| null
+  onChangeDate:(date: Date | null)=>void
+  selectedDate: string | Date | null
 }
 
 export const DatePicker:VFC<Props>=memo((props)=> {
-  const { onClickConfirm, onChangeDate, selectedDate } = props
+  const { onChangeDate, selectedDate } = props
 
   return (
     <MuiPickersUtilsProvider locale={ja} utils={ExtendedUtils}>
@@ -41,7 +40,6 @@ export const DatePicker:VFC<Props>=memo((props)=> {
         KeyboardButtonProps={{
           'aria-label': 'change date',
         }}
-        onAccept={onClickConfirm}
       />
     </MuiPickersUtilsProvider>
   );

@@ -19,7 +19,7 @@ export const LoginPage:VFC<Props>=(props)=>{
 
   const onClickButton=()=> {
     setKidId!(value)
-    history.push({pathname:"/"})
+    history.push({pathname:"/top"})
 }
   return (
     <>

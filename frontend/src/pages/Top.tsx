@@ -5,12 +5,13 @@ import { useContext, useEffect, useState, VFC } from "react";
 import { MenuAppBar } from '../organisms/Header'
 import { Kid } from '../types/api/kid'
 import { CircularDeterminate } from '../atoms/Spinner'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { DatePicker } from "../atoms/DatePicker";
 import { UserContext } from "../provider/UserProvider";
 import { SimpleAlerts } from "../atoms/Alert";
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import { useHistory } from 'react-router-dom'
+
 
 export const TopPage:VFC =()=>{
 
@@ -21,24 +22,17 @@ export const TopPage:VFC =()=>{
   const [label, setLabel] = useState<string>("")
   const { kidId } = useContext(UserContext)
   const { state } = useLocation()
-  const [selectedDate, setSelectedDate] = useState<Date | string | null>(null);
+  const [selectedDate, setSelectedDate] = useState< Date | null>(new Date());
   const history = useHistory()
 
-  const createNewDate=(date: Date | string | number ) =>{
-      const newDate = format(new Date(date), 'MM/dd/yyyy')
-      // const targetDate= newDate.getDate() + "-" +  (newDate.getMonth() + 1)  + "-" +  newDate.getFullYear()
-      console.log(newDate)
-      setSelectedDate(newDate)
-      console.log(selectedDate)
-      return selectedDate
-    }
-  const onClickConfirm = ()=>{
-    history.push({pathname:"/registration", state: selectedDate})
-    console.log(selectedDate)
-  }
+  const newDate = format(selectedDate!, 'MM/dd/yyyy')
 
-  const handleDateChange = (date: MaterialUiPickersDate) => {
-    createNewDate(date!)
+  const onClickButton =()=>{
+    history.push({pathname:"/registration", state:selectedDate})
+    console.log(newDate)
+  }
+  const handleDateChange = (date: Date | null ) => {
+    setSelectedDate(date)
     console.log(date)
   };
   const fetchUser =()=>(
@@ -78,7 +72,8 @@ export const TopPage:VFC =()=>{
           name={result?.name}
           daycare_name={result?.daycare_name}
         />
-        <DatePicker onChangeDate={handleDateChange} onClickConfirm={onClickConfirm} selectedDate={selectedDate}/>
+        <DatePicker onChangeDate={handleDateChange}  selectedDate={selectedDate}/>
+        <button color="primary"  onClick={onClickButton}>連絡帳</button>
         <SimpleAlerts status={status} label={label} />
       </>
       )
