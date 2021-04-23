@@ -12,7 +12,7 @@ import { DraggableDialog } from '../molecules/DraggableDialog';
 
 
 export type Props={
-  selectedDate: Date
+  selectedDate: Date | string
   dinner:string | null
   breakfast:string | null
   memo: string | null

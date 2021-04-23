@@ -5,6 +5,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { InputOfNotebook } from "../organisms/InputOfNotebook";
 import { CommunicationNotebook } from "../types/api/communication_notebook";
 import { UserContext } from "../provider/UserProvider";
+import format from "date-fns/format";
 
 export const RegistrationPage:VFC= memo(()=>{
   const [result, setResult] = useState<CommunicationNotebook>({
@@ -96,12 +97,19 @@ export const RegistrationPage:VFC= memo(()=>{
   }
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<Date>()
-  console.log(state)
-
+  const example = "aaa:bbb:ccc"
+  console.log(typeof example)
+  const newDate = format(state!, 'yyyy/MM/dd')
+  console.log(newDate)
 
   const fetchUser =()=>(
     axios
-    .get<CommunicationNotebook>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`)
+    .get<CommunicationNotebook>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`,{
+      params:{
+        date: state
+      }
+      }
+    )
     .then((res)=>{
       setResult(res.data)
       console.log(result)
@@ -121,9 +129,8 @@ export const RegistrationPage:VFC= memo(()=>{
       :error?(
         <h1>エラー</h1>
       ):(
-      <>
         <InputOfNotebook
-          selectedDate={ state }
+          selectedDate={newDate}
           dinner={dinner}
           onChangeDinner={handleDinnerChange}
           breakfast={breakfast}
@@ -144,7 +151,6 @@ export const RegistrationPage:VFC= memo(()=>{
           onClickDialogOpen={handleDialogOpen}
           onClickRegister={handleClickRegister}
           />
-      </>
       )
     }
     </>
