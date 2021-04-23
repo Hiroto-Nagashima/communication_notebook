@@ -85,6 +85,25 @@ export const RegistrationPage:VFC= memo(()=>{
       })
       .catch((e)=>console.log(e))
   }
+
+  const onClickButton=() =>{
+    axios
+      .put(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks/:id`,{
+        communication_notebook:{
+          bodyTemperature: bodyTemperature,
+          mood: selectedIndex,
+          bath: bath,
+          breakfast: breakfast,
+          dinner: dinner,
+          memo: memo
+        }
+      })
+      .then((res)=>{
+        history.push({pathname: "/top", state: "info"})
+        console.log(res.data)
+      })
+      .catch((e)=>console.log(e))
+  }
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<Date>()
   const example = "aaa:bbb:ccc"
@@ -124,28 +143,31 @@ export const RegistrationPage:VFC= memo(()=>{
       :error?(
         <h1>エラー</h1>
       ):(
-        <InputOfNotebook
-          selectedDate={newDate}
-          dinner={dinner}
-          onChangeDinner={handleDinnerChange}
-          breakfast={breakfast}
-          onChangeBreakfast={handleBreakfastChange}
-          memo={memo}
-          onChangeMemo={handleMemoChange}
-          bath={bath}
-          onChangeBath={handleBathChange}
-          body_temperature={bodyTemperature}
-          onChangeBodyTemperature={handleBodyTemperatureChange}
-          anchorEl={anchorEl}
-          index={selectedIndex}
-          onClose={handleClose}
-          onClickMenu={handleMenuItemClick}
-          onClickButton={handleClick}
-          isOpen={open}
-          onClickDialogClose={handleDialogClose}
-          onClickDialogOpen={handleDialogOpen}
-          onClickRegister={handleClickRegister}
-          />
+        <>
+          <InputOfNotebook
+            selectedDate={newDate}
+            dinner={dinner}
+            onChangeDinner={handleDinnerChange}
+            breakfast={breakfast}
+            onChangeBreakfast={handleBreakfastChange}
+            memo={memo}
+            onChangeMemo={handleMemoChange}
+            bath={bath}
+            onChangeBath={handleBathChange}
+            body_temperature={bodyTemperature}
+            onChangeBodyTemperature={handleBodyTemperatureChange}
+            anchorEl={anchorEl}
+            index={selectedIndex}
+            onClose={handleClose}
+            onClickMenu={handleMenuItemClick}
+            onClickButton={handleClick}
+            isOpen={open}
+            onClickDialogClose={handleDialogClose}
+            onClickDialogOpen={handleDialogOpen}
+            onClickRegister={handleClickRegister}
+            />
+            {/* <button color="primary"  onClick={onClickButton}>更新</button> */}
+          </>
       )
     }
     </>

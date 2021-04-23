@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_21_141101) do
+ActiveRecord::Schema.define(version: 2021_04_23_175655) do
 
   create_table "communication_notebooks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "bodyTemperature"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_04_21_141101) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "bath"
     t.integer "kid_id"
+    t.date "date"
   end
 
   create_table "kids", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
