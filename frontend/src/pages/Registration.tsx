@@ -8,43 +8,33 @@ import { UserContext } from "../provider/UserProvider";
 import format from "date-fns/format";
 
 export const RegistrationPage:VFC= memo(()=>{
-  const [result, setResult] = useState<CommunicationNotebook>({
-    id: null,
-    daycare_id: null,
-    body_temperature: null,
-    mood: 1,
-    bath: null,
-    breakfast: null,
-    dinner: null,
-    memo: null
-  })
 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
-  const [dinner, setDinner] = useState<string | null>(result.dinner);
+  const [dinner, setDinner] = useState<string | null>(null);
   const handleDinnerChange = (e:ChangeEvent<HTMLInputElement>) => {
     setDinner(e.target.value);
     console.log("1")
   }
 
-  const [breakfast, setBreakfast] = useState<string | null>(result.breakfast);
+  const [breakfast, setBreakfast] = useState<string | null>(null);
   const handleBreakfastChange = (e:ChangeEvent<HTMLInputElement>) => {
     setBreakfast(e.target.value);
     console.log("2")
   }
 
-  const [memo, setMemo] = useState<string>("");
+  const [memo, setMemo] = useState<string | null>(null);
   const handleMemoChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setMemo(e.target.value);
   }, [])
 
-  const [bodyTemperature, setBodyTemperature] = useState<number |string|  null>(result.body_temperature);
+  const [bodyTemperature, setBodyTemperature] = useState<number |string|  null>(null);
   const handleBodyTemperatureChange = (e:ChangeEvent<HTMLInputElement>) => {
     setBodyTemperature(e.target.value);
   }
 
-  const [ bath, setBath] = useState<string | null>(result.bath);
+  const [ bath, setBath ] = useState<string | null>(null);
 
   const handleBathChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setBath((e.target as HTMLInputElement).value);
@@ -59,7 +49,7 @@ export const RegistrationPage:VFC= memo(()=>{
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const [selectedIndex, setSelectedIndex] = useState<number>(result.mood);
+  const [selectedIndex, setSelectedIndex] = useState<number>(1);
   const handleMenuItemClick = (event: React.MouseEvent<HTMLElement>, index: number) => {
     setSelectedIndex(index);
     setAnchorEl(null);
@@ -104,15 +94,20 @@ export const RegistrationPage:VFC= memo(()=>{
 
   const fetchUser =()=>(
     axios
-    .get<CommunicationNotebook>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`,{
+    .get<Array<CommunicationNotebook>>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`,{
       params:{
         date: state
       }
       }
     )
     .then((res)=>{
-      setResult(res.data)
-      console.log(result)
+      setDinner(res.data[0].dinner)
+      setBreakfast(res.data[0].breakfast)
+      setMemo(res.data[0].memo)
+      setBodyTemperature(res.data[0].bodyTemperature)
+      setSelectedIndex(res.data[0].mood)
+      setBath(res.data[0].bath)
+      console.log(res.data)
       }
     )
     .catch((e)=> setError(e))

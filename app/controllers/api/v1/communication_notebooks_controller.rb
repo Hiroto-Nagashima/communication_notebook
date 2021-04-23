@@ -15,7 +15,10 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
   end
 
   def index
-    if communication_notebook = CommunicationNotebook.find_by(created_at: params[:date])
+    date = params[:date]
+    new_date = date.slice(0..9)
+    communication_notebook = CommunicationNotebook.where("created_at like?", "#{new_date}%")
+    if communication_notebook.present?
       render json: communication_notebook
     else
       @communication_notebook= CommunicationNotebook.new
