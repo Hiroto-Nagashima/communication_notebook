@@ -12,7 +12,7 @@ const Template: Story<Props> = (args) => <InputOfNotebook {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  selectedDate:"4月15日"
+
 };
 
 // export const LoggedOut = Template.bind({});

@@ -95,7 +95,7 @@ export const RegistrationPage:VFC= memo(()=>{
       .catch((e)=>console.log(e))
   }
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
-  const { state } = useLocation<string>()
+  const { state } = useLocation<Date>()
   console.log(state)
 
 
@@ -105,10 +105,8 @@ export const RegistrationPage:VFC= memo(()=>{
     .then((res)=>{
       setResult(res.data)
       console.log(result)
-
-    }
+      }
     )
-
     .catch((e)=> setError(e))
     .finally(() => setLoading(false))
   )
