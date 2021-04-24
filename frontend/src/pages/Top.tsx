@@ -10,6 +10,7 @@ import { DatePicker } from "../atoms/DatePicker";
 import { UserContext } from "../provider/UserProvider";
 import { SimpleAlerts } from "../atoms/Alert";
 import { useHistory } from 'react-router-dom'
+import { CommunicationNotebook } from "../types/api/communication_notebook";
 export const TopPage:VFC =memo(()=>{
 
   const [result, setResult] = useState<Kid | null>(null)
@@ -20,6 +21,7 @@ export const TopPage:VFC =memo(()=>{
   const { kidId } = useContext(UserContext)
   const { state } = useLocation()
   const [selectedDate, setSelectedDate] = useState< Date | null>(new Date());
+  const [ allNotebooks, setAllNotebooks ] = useState<Array<CommunicationNotebook>>([])
   const history = useHistory()
 
   const onClickNewButton =()=>{
@@ -28,7 +30,9 @@ export const TopPage:VFC =memo(()=>{
   const onClickPastButton =()=>{
     axios
     .get(`http://localhost:3000/api/v1/kids/${kidId}/communication_notebooks`)
-    .then((res)=> console.log(res.data))
+    .then((res)=>{
+      setAllNotebooks(res.data)
+    })
     .catch((e)=> console.log(e))
   }
   const handleDateChange = (date: Date | null ) => {
@@ -80,6 +84,9 @@ export const TopPage:VFC =memo(()=>{
         <button color="primary"  onClick={onClickNewButton}>連絡帳を新規登録</button>
         <button color="primary"  onClick={onClickPastButton}>過去の連絡帳を見る</button>
         <SimpleAlerts status={status} label={label} />
+        {allNotebooks.map((allNotebook)=>{
+          <button color="primary"  onClick={onClickNewButton}>{allNotebook.date}の連絡帳</button>
+        })}
       </>
       )
     }

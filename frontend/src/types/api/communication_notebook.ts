@@ -7,5 +7,5 @@ export type CommunicationNotebook={
   breakfast: string | null
   dinner: string | null
   memo: string | null
-
+  date: Date
 }
