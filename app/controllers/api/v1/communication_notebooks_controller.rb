@@ -34,6 +34,16 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
     communication_notebooks = Kid.communication_notebooks
     render json: communication_notebooks
   end
+  def new
+    target_date = params[:target_date]
+    new_date = target_date.slice(0..9)
+    communication_notebook = CommunicationNotebook.where("date like?", "#{new_date}%")
+    if communication_notebook.present?
+      render json: {status: "ok"}
+    else
+      render json: {status: "already exist"}
+    end
+  end
   private
 
   def communication_notebook_params
