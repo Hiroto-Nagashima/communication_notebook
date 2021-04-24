@@ -53,14 +53,9 @@ export const TopPage:VFC =memo(()=>{
     })
     .catch((e)=> console.log(e))
   }
-  const onClickUpdateButton =()=>{
-    axios
-    .get(`http://localhost:3000/api/v1/kids/${kidId}/communication_notebooks`)
-    .then((res)=>{
-      setAllNotebooks(res.data)
-      console.log(allNotebooks)
-    })
-    .catch((e)=> console.log(e))
+
+  const onClickUpdateButton =(date:Date)=>{
+    history.push({pathname:"/registration", state: date})
   }
 
   const handleDateChange = (date: Date | null ) => {
@@ -113,7 +108,7 @@ export const TopPage:VFC =memo(()=>{
         <SimpleAlerts status={status} label={label} />
         {allNotebooks.map((allNotebook)=>(
           <Box>
-            <Button color="primary" variant="contained" onClick={{allNotebook}=>onClickUpdateButton}>{allNotebook.date}のノートを表示</Button>
+            <Button color="primary" variant="contained" onClick={(allNotebook.date)=>onClickUpdateButton}>{allNotebook.date}のノートを表示</Button>
           </Box>
         ))}
       </>
