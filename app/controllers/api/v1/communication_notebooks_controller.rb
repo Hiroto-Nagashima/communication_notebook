@@ -44,6 +44,13 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
       render json: {status: "no data"}
     end
   end
+
+  def edit
+    target_date = params[:target_date]
+    new_date = target_date.slice(0..9)
+    communication_notebook = CommunicationNotebook.where("date like?", "#{new_date}%")
+    render json: communication_notebook
+  end
   private
 
   def communication_notebook_params
