@@ -94,7 +94,6 @@ export const TopPage:VFC =memo(()=>{
           iconColor="inherit"
           barColor="primary"
           auth= {true}
-          // kid={{kid_name: `${result?.kid_name}`, nursery_name: `${result?.nursery_name}`}}
           name={result?.name}
           daycare_name={result?.daycare_name}
         />

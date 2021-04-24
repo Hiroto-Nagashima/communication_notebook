@@ -10,6 +10,7 @@ import format from "date-fns/format";
 export const RegistrationPage:VFC= memo(()=>{
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const [isUpdate, setIsUpdate] = useState(false)
   const [dinner, setDinner] = useState<string | null>(null);
   const handleDinnerChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setDinner(e.target.value);
@@ -101,7 +102,6 @@ export const RegistrationPage:VFC= memo(()=>{
     )
     .then((res)=>{
       console.log(res.data)
-      console.log(res.data)
       setDinner(res.data.dinner)
       console.log("bye")
       setBreakfast(res.data.breakfast)
@@ -120,7 +120,11 @@ export const RegistrationPage:VFC= memo(()=>{
 
   useEffect(()=>{
     fetchNotebook()
-  },[])
+  },[isUpdate])
+
+  // useEffect(()=>{
+  // },[])
+
   return (
     <>
     {loading?
