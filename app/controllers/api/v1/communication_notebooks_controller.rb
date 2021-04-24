@@ -39,9 +39,9 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
     new_date = target_date.slice(0..9)
     communication_notebook = CommunicationNotebook.where("date like?", "#{new_date}%")
     if communication_notebook.present?
-      render json: {status: "ok"}
-    else
       render json: {status: "already exist"}
+    else
+      render json: {status: "no data"}
     end
   end
   private
