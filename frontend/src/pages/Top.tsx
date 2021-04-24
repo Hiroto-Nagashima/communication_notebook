@@ -26,7 +26,10 @@ export const TopPage:VFC =memo(()=>{
     history.push!({pathname:"/registration", state:selectedDate})
   }
   const onClickPastButton =()=>{
-    
+    axios
+    .get(`http://localhost:3000/api/v1/kids/${kidId}/communication_notebooks`)
+    .then((res)=> console.log(res.data))
+    .catch((e)=> console.log(e))
   }
   const handleDateChange = (date: Date | null ) => {
     setSelectedDate(date)
