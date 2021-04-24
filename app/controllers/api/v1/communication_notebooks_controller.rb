@@ -37,6 +37,8 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
       render json: communication_notebook
     else
       @communication_notebook= CommunicationNotebook.new
+      #SimpleMenu内のIndexがnillになるとエラーになる
+      @communication_notebook.mood = 0
       render json: @communication_notebook
     end
   end
