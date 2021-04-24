@@ -40,9 +40,9 @@ export const RegistrationPage:VFC= memo(()=>{
   },[]);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setAnchorEl(null);
-  };
+  },[])
 
   const handleClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -56,13 +56,13 @@ export const RegistrationPage:VFC= memo(()=>{
 
   const [open, setOpen] = useState(false);
 
-  const handleDialogOpen = () => {
+  const handleDialogOpen = useCallback(() => {
     setOpen(true);
-  };
+  },[]);
 
-  const handleDialogClose = () => {
+  const handleDialogClose = useCallback(() => {
     setOpen(false);
-  };
+  },[]);
   const { kidId } = useContext(UserContext)
   const history = useHistory()
   const handleClickRegister=() =>{
@@ -87,32 +87,33 @@ export const RegistrationPage:VFC= memo(()=>{
 
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<Date>()
-  const example = "aaa:bbb:ccc"
-  console.log(typeof example)
   const newDate = format(state!, 'yyyy/MM/dd')
   console.log(newDate)
   console.log(kidId)
 
   const fetchNotebook =()=>(
     axios
-    .get<Array<CommunicationNotebook>>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`,{
+    .get<CommunicationNotebook>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`,{
       params:{
         target_date: state
       }
       }
     )
     .then((res)=>{
-      console.log("hello")
-      setDinner(res.data[0].dinner)
+      console.log(res.data)
+      setDinner(res.data.dinner)
       console.log("bye")
-      setBreakfast(res.data[0].breakfast)
-      setMemo(res.data[0].memo)
-      setBodyTemperature(res.data[0].bodyTemperature)
-      setSelectedIndex(res.data[0].mood)
-      setBath(res.data[0].bath)
+      setBreakfast(res.data.breakfast)
+      setMemo(res.data.memo)
+      setBodyTemperature(res.data.bodyTemperature)
+      setSelectedIndex(res.data.mood)
+      setBath(res.data.bath)
       }
     )
-    .catch((e)=> setError(e))
+    .catch((e)=> {
+      setError(e)
+      console.log(e)
+    })
     .finally(() => setLoading(false))
   )
 

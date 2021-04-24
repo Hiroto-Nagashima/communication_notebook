@@ -17,6 +17,7 @@ export type Props={
 
 export const SimpleMenu:VFC<Props>=(props)=> {
   const{ onClickMenuItem, onClose, onClickButton, Index, anchorEl } = props
+  console.log(Index)
   return (
     <div>
       <Button aria-controls="simple-menu" aria-haspopup="true" onClick={onClickButton} color="primary">
@@ -41,7 +42,7 @@ export const SimpleMenu:VFC<Props>=(props)=> {
           </MenuItem>
         ))}
       </Menu>
-      <Input value={OPTIONS[Index].label} readOnly/>
+      <Input value={OPTIONS[1].label} readOnly/>
     </div>
   );
 }
