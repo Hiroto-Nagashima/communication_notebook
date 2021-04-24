@@ -33,7 +33,12 @@ export const TopPage:VFC =memo(()=>{
       }
     })
     .then((res)=>{
-      console.log(res.data)
+      if(res.data.status === "no data"){
+        history.push({pathname:"/registration", state:selectedDate})
+      }else{
+        setStatus("warning")
+        setLabel("既にデータが存在しています")
+      }
     })
     .catch((e)=> console.log(e))
     // history.push!({pathname:"/registration", state:selectedDate})
