@@ -1,7 +1,7 @@
 import axios from "axios";
 import 'date-fns';
 import format from "date-fns/format";
-import { useContext, useEffect, useState, VFC } from "react";
+import { useContext, useEffect, useState, VFC, memo } from "react";
 import { MenuAppBar } from '../organisms/Header'
 import { Kid } from '../types/api/kid'
 import { CircularDeterminate } from '../atoms/Spinner'
@@ -9,11 +9,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { DatePicker } from "../atoms/DatePicker";
 import { UserContext } from "../provider/UserProvider";
 import { SimpleAlerts } from "../atoms/Alert";
-import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import { useHistory } from 'react-router-dom'
-
-
-export const TopPage:VFC =()=>{
+export const TopPage:VFC =memo(()=>{
 
   const [result, setResult] = useState<Kid | null>(null)
   const [loading, setLoading] = useState(true)
@@ -28,7 +25,7 @@ export const TopPage:VFC =()=>{
   const newDate = format(selectedDate!, 'MM/dd/yyyy')
 
   const onClickButton =()=>{
-    history.push({pathname:"/registration", state:selectedDate})
+    history.push!({pathname:"/registration", state:selectedDate})
     console.log(newDate)
   }
   const handleDateChange = (date: Date | null ) => {
@@ -80,4 +77,4 @@ export const TopPage:VFC =()=>{
     }
     </>
   )
-}
+})

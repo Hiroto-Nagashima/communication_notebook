@@ -30,9 +30,9 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
   # end
 
   def index
-    date = params[:date]
-    new_date = date.slice(0..9)
-    communication_notebook = CommunicationNotebook.where("created_at like?", "#{new_date}%")
+    target_date = params[:target_date]
+    new_date = target_date.slice(0..9)
+    communication_notebook = CommunicationNotebook.where("date like?", "#{new_date}%")
     if communication_notebook.present?
       render json: communication_notebook
     else
@@ -43,6 +43,6 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
   private
 
   def communication_notebook_params
-    params.require(:communication_notebook).permit(:bodyTemperature, :bath, :mood, :breakfast, :dinner, :memo)
+    params.require(:communication_notebook).permit(:bodyTemperature, :bath, :mood, :breakfast, :dinner, :memo, :date)
   end
 end

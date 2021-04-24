@@ -8,31 +8,29 @@ import { UserContext } from "../provider/UserProvider";
 import format from "date-fns/format";
 
 export const RegistrationPage:VFC= memo(()=>{
-
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
-
   const [dinner, setDinner] = useState<string | null>(null);
-  const handleDinnerChange = (e:ChangeEvent<HTMLInputElement>) => {
+  const handleDinnerChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setDinner(e.target.value);
     console.log("1")
-  }
+  },[])
 
   const [breakfast, setBreakfast] = useState<string | null>(null);
-  const handleBreakfastChange = (e:ChangeEvent<HTMLInputElement>) => {
+  const handleBreakfastChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setBreakfast(e.target.value);
     console.log("2")
-  }
+  },[])
 
   const [memo, setMemo] = useState<string | null>(null);
   const handleMemoChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setMemo(e.target.value);
   }, [])
 
-  const [bodyTemperature, setBodyTemperature] = useState<number |string|  null>(null);
-  const handleBodyTemperatureChange = (e:ChangeEvent<HTMLInputElement>) => {
+  const [bodyTemperature, setBodyTemperature] = useState<number |string| null>(null);
+  const handleBodyTemperatureChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setBodyTemperature(e.target.value);
-  }
+  },[])
 
   const [ bath, setBath ] = useState<string | null>(null);
 
@@ -46,15 +44,15 @@ export const RegistrationPage:VFC= memo(()=>{
     setAnchorEl(null);
   };
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
-  };
+  },[])
   const [selectedIndex, setSelectedIndex] = useState<number>(1);
-  const handleMenuItemClick = (event: React.MouseEvent<HTMLElement>, index: number) => {
+  const handleMenuItemClick = useCallback((event: React.MouseEvent<HTMLElement>, index: number) => {
     setSelectedIndex(index);
     setAnchorEl(null);
     console.log(selectedIndex)
-  };
+  },[selectedIndex])
 
   const [open, setOpen] = useState(false);
 
@@ -76,7 +74,8 @@ export const RegistrationPage:VFC= memo(()=>{
           bath: bath,
           breakfast: breakfast,
           dinner: dinner,
-          memo: memo
+          memo: memo,
+          date: state
         }
       })
       .then((res)=>{
@@ -86,47 +85,31 @@ export const RegistrationPage:VFC= memo(()=>{
       .catch((e)=>console.log(e))
   }
 
-  const onClickButton=() =>{
-    axios
-      .put(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks/:id`,{
-        communication_notebook:{
-          bodyTemperature: bodyTemperature,
-          mood: selectedIndex,
-          bath: bath,
-          breakfast: breakfast,
-          dinner: dinner,
-          memo: memo
-        }
-      })
-      .then((res)=>{
-        history.push({pathname: "/top", state: "info"})
-        console.log(res.data)
-      })
-      .catch((e)=>console.log(e))
-  }
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<Date>()
   const example = "aaa:bbb:ccc"
   console.log(typeof example)
   const newDate = format(state!, 'yyyy/MM/dd')
   console.log(newDate)
+  console.log(kidId)
 
-  const fetchUser =()=>(
+  const fetchNotebook =()=>(
     axios
     .get<Array<CommunicationNotebook>>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`,{
       params:{
-        date: state
+        target_date: state
       }
       }
     )
     .then((res)=>{
+      console.log("hello")
       setDinner(res.data[0].dinner)
+      console.log("bye")
       setBreakfast(res.data[0].breakfast)
       setMemo(res.data[0].memo)
       setBodyTemperature(res.data[0].bodyTemperature)
       setSelectedIndex(res.data[0].mood)
       setBath(res.data[0].bath)
-      console.log(res.data)
       }
     )
     .catch((e)=> setError(e))
@@ -134,8 +117,8 @@ export const RegistrationPage:VFC= memo(()=>{
   )
 
   useEffect(()=>{
-    fetchUser()
-  },[])
+    fetchNotebook()
+  },[fetchNotebook])
   return (
     <>
     {loading?
@@ -166,7 +149,6 @@ export const RegistrationPage:VFC= memo(()=>{
             onClickDialogOpen={handleDialogOpen}
             onClickRegister={handleClickRegister}
             />
-            {/* <button color="primary"  onClick={onClickButton}>更新</button> */}
           </>
       )
     }
