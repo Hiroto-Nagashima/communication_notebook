@@ -30,17 +30,9 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
   # end
 
   def index
-    target_date = params[:target_date]
-    new_date = target_date.slice(0..9)
-    communication_notebook = CommunicationNotebook.where("date like?", "#{new_date}%")
-    if communication_notebook.present?
-      render json: communication_notebook
-    else
-      @communication_notebook= CommunicationNotebook.new
-      #SimpleMenu内のIndexがnillになるとエラーになる
-      @communication_notebook.mood = 0
-      render json: @communication_notebook
-    end
+    kid = Kid.find(params[kid_id])
+    communication_notebooks = Kid.communication_notebooks
+    render json: communication_notebooks
   end
   private
 
