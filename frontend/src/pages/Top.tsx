@@ -22,11 +22,11 @@ export const TopPage:VFC =memo(()=>{
   const [selectedDate, setSelectedDate] = useState< Date | null>(new Date());
   const history = useHistory()
 
-  const newDate = format(selectedDate!, 'MM/dd/yyyy')
-
-  const onClickButton =()=>{
+  const onClickNewButton =()=>{
     history.push!({pathname:"/registration", state:selectedDate})
-    console.log(newDate)
+  }
+  const onClickPastButton =()=>{
+    
   }
   const handleDateChange = (date: Date | null ) => {
     setSelectedDate(date)
@@ -70,7 +70,8 @@ export const TopPage:VFC =memo(()=>{
           daycare_name={result?.daycare_name}
         />
         <DatePicker onChangeDate={handleDateChange}  selectedDate={selectedDate}/>
-        <button color="primary"  onClick={onClickButton}>連絡帳</button>
+        <button color="primary"  onClick={onClickNewButton}>連絡帳を新規登録</button>
+        <button color="primary"  onClick={onClickPastButton}>過去の連絡帳を見る</button>
         <SimpleAlerts status={status} label={label} />
       </>
       )

@@ -101,6 +101,7 @@ export const RegistrationPage:VFC= memo(()=>{
     )
     .then((res)=>{
       console.log(res.data)
+      console.log(res.data)
       setDinner(res.data.dinner)
       console.log("bye")
       setBreakfast(res.data.breakfast)
