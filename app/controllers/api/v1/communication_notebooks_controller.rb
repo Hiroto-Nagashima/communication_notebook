@@ -30,8 +30,8 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
   # end
 
   def index
-    kid = Kid.find(params[kid_id])
-    communication_notebooks = Kid.communication_notebooks
+    kid = Kid.find(params[:kid_id])
+    communication_notebooks = kid.communication_notebooks
     render json: communication_notebooks
   end
   def new

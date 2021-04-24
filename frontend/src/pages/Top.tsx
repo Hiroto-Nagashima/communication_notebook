@@ -37,7 +37,11 @@ export const TopPage:VFC =memo(()=>{
   };
   const fetchUser =()=>(
     axios
-    .get<Kid>(`http://localhost:3000/api/v1/kids/${kidId}`)
+    .get<Kid>(`http://localhost:3000/api/v1/kids/${kidId}`,{
+      params:{
+        kid_id:kidId
+      }
+    })
     .then((res)=> {
       setResult(res.data)
       setStatus("success")
