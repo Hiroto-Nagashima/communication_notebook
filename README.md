@@ -1,9 +1,25 @@
-# Name
-communication Notebook
+# Communication Notebook
+## Overview
 
-# Usage
-1. rootページにてid入力欄に1か2を入力
-2. Topページに遷移。Topページ内にあるDatePickerから日付を選択
-3. 日付を選択したら、「連絡帳」というボタンをおす
-4. Registrationページに遷移。連絡帳のフォームが表示されるされるのでそこに必要事項を入力
-5. 決定を押すと入力値を登録して、Topページに遷移
+保育園の連絡帳アプリの練習版です。
+
+## Description
+
+- 今回は認証機能は導入していないので、入力したidをContext APIを使ってグローバルなstateとして扱い、ログインをしているかのような動きを取り入れています
+- Delete以外の基本的なCRUD処理の動きを導入しています。具体的には連絡帳の作成、更新、過去の連絡帳の取得などができます
+
+## Installation
+
+`git clone https://github.com/Hiroto-Nagashima/communication_notebook.git`
+
+## Languages
+- frontend
+  - React
+  - TypeScript
+- backend
+  - Ruby On Rails
+
+
+## Unit Test
+
+WIP
