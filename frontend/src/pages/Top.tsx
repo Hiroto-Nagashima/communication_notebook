@@ -11,8 +11,9 @@ import { UserContext } from "../provider/UserProvider";
 import { SimpleAlerts } from "../atoms/Alert";
 import { useHistory } from 'react-router-dom'
 import { CommunicationNotebook } from "../types/api/communication_notebook";
-export const TopPage:VFC =memo(()=>{
+import { Box, Button } from "@material-ui/core";
 
+export const TopPage:VFC =memo(()=>{
   const [result, setResult] = useState<Kid | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -25,13 +26,15 @@ export const TopPage:VFC =memo(()=>{
   const history = useHistory()
 
   const onClickNewButton =()=>{
-    history.push!({pathname:"/registration", state:selectedDate})
+    // history.push!({pathname:"/registration", state:selectedDate})
+    console.log(allNotebooks)
   }
   const onClickPastButton =()=>{
     axios
     .get(`http://localhost:3000/api/v1/kids/${kidId}/communication_notebooks`)
     .then((res)=>{
       setAllNotebooks(res.data)
+      console.log(allNotebooks)
     })
     .catch((e)=> console.log(e))
   }
@@ -84,9 +87,11 @@ export const TopPage:VFC =memo(()=>{
         <button color="primary"  onClick={onClickNewButton}>連絡帳を新規登録</button>
         <button color="primary"  onClick={onClickPastButton}>過去の連絡帳を見る</button>
         <SimpleAlerts status={status} label={label} />
-        {allNotebooks.map((allNotebook)=>{
-          <button color="primary"  onClick={onClickNewButton}>{allNotebook.date}の連絡帳</button>
-        })}
+        {allNotebooks.map((allNotebook)=>(
+          <Box>
+            <Button color="primary" variant="contained">{allNotebook.date}のノートを表示</Button>
+          </Box>
+        ))}
       </>
       )
     }
