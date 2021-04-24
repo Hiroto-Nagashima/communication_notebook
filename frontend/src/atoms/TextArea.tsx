@@ -11,7 +11,7 @@ export type Props={
 // 列の指定ができるTextarea
 export const MultilineTextField:VFC<Props>=(props)=> {
   const { label,row, value, onChange } = props
-
+  console.log("レンダー")
   return (
     <TextField
     id="outlined-multiline-static"

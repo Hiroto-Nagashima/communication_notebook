@@ -37,7 +37,7 @@ export const RegistrationPage:VFC= memo(()=>{
   const handleBathChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setBath((e.target as HTMLInputElement).value);
     console.log(bath)
-  },[bath]);
+  },[]);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleClose = () => {
@@ -52,7 +52,7 @@ export const RegistrationPage:VFC= memo(()=>{
     setSelectedIndex(index);
     setAnchorEl(null);
     console.log(selectedIndex)
-  },[selectedIndex])
+  },[])
 
   const [open, setOpen] = useState(false);
 
@@ -118,7 +118,7 @@ export const RegistrationPage:VFC= memo(()=>{
 
   useEffect(()=>{
     fetchNotebook()
-  },[fetchNotebook])
+  },[])
   return (
     <>
     {loading?
