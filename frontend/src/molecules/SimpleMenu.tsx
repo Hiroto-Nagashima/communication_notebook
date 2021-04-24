@@ -42,7 +42,7 @@ export const SimpleMenu:VFC<Props>=(props)=> {
           </MenuItem>
         ))}
       </Menu>
-      <Input value={OPTIONS[1].label} readOnly/>
+      <Input value={OPTIONS[Index].label} readOnly/>
     </div>
   );
 }
