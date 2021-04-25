@@ -21,4 +21,9 @@ RSpec.describe "Api::V1::CommunicationNotebooks", type: :request do
       expect(json.size).to eq 10
     end
   end
+  describe "GET /api/v1/kids/:id/communication_notebooks/new" do
+    context "ある日付の連絡帳が既に存在しているかチェックするAPI" do
+
+    end
+  end
 end
