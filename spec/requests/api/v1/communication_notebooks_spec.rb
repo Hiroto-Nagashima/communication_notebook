@@ -39,10 +39,10 @@ RSpec.describe "Api::V1::CommunicationNotebooks", type: :request do
   end
   describe "Post /api/v1/kids/:id/communication_notebooks/" do
     it "ある子供に紐づく連絡帳を登録するAPI" do
-      post "/api/v1/kids/#{kid.id}/communication_notebooks"
-      # json = JSON.parse(response.body)
-      # expect(response).to have_http_status(200)
-      # expect(json.size).to eq 10
+      valid_params= attributes_for(:communication_notebook)
+      expect { post "/api/v1/kids/#{kid.id}/communication_notebooks", params:{communication_notebook: valid_params }}
+      .to change(CommunicationNotebook, :count).by(+1)
+      expect(response).to have_http_status(200)
     end
   end
 end
