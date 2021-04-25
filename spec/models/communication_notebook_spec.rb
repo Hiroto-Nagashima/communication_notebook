@@ -25,6 +25,36 @@ RSpec.describe CommunicationNotebook, type: :model do
       expect(communication_notebook). not_to be_valid
       expect(communication_notebook.errors.messages[:bodyTemperature]).to include("can't be blank")
     end
+    it '機嫌が空欄の場合保存に失敗するか' do
+      communication_notebook = CommunicationNotebook.new
+      expect(communication_notebook). not_to be_valid
+      expect(communication_notebook.errors.messages[:mood]).to include("can't be blank")
+    end
+    it '入浴が空欄の場合保存に失敗するか' do
+      communication_notebook = CommunicationNotebook.new
+      expect(communication_notebook). not_to be_valid
+      expect(communication_notebook.errors.messages[:bath]).to include("can't be blank")
+    end
+    it '夕食が空欄の場合保存に失敗するか' do
+      communication_notebook = CommunicationNotebook.new
+      expect(communication_notebook). not_to be_valid
+      expect(communication_notebook.errors.messages[:dinner]).to include("can't be blank")
+    end
+    it '朝食が空欄の場合保存に失敗するか' do
+      communication_notebook = CommunicationNotebook.new
+      expect(communication_notebook). not_to be_valid
+      expect(communication_notebook.errors.messages[:breakfast]).to include("can't be blank")
+    end
+    it 'メモが空欄の場合保存に失敗するか' do
+      communication_notebook = CommunicationNotebook.new
+      expect(communication_notebook). not_to be_valid
+      expect(communication_notebook.errors.messages[:memo]).to include("can't be blank")
+    end
+    it '日付が空欄の場合保存に失敗するか' do
+      communication_notebook = CommunicationNotebook.new
+      expect(communication_notebook). not_to be_valid
+      expect(communication_notebook.errors.messages[:date]).to include("can't be blank")
+    end
   end
 
 end
