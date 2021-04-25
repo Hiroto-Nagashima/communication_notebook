@@ -48,5 +48,24 @@ RSpec.describe Kid, type: :model do
       expect(kid.errors.messages[:password]).to include("can't be blank")
     end
 
+    it '入力がない場合保存できない' do
+      kid = Kid.new
+      expect(kid). not_to be_valid
+      expect(kid.save).to be_falsey
+    end
+
+  end
+  describe '入力文字数の長さ' do
+    it 'パスワードが6文字より少ないとエラーになるか' do
+      kid = Kid.new(
+        name: "前田たけし",
+        age: 1,
+        daycare_name: "埼玉保育園",
+        email: "12345@gmail.com",
+        password: 12345
+      )
+      kid.valid?
+      expect(kid.errors.messages[:password]).to include("is too short (minimum is 6 characters)")
+    end
   end
 end
