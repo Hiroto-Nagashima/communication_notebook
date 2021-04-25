@@ -23,7 +23,10 @@ RSpec.describe "Api::V1::CommunicationNotebooks", type: :request do
   end
   describe "GET /api/v1/kids/:id/communication_notebooks/new" do
     context "ある日付の連絡帳が既に存在しているかチェックするAPI" do
-
+      it "ある日付の連絡帳が既に存在している場合のレスポンス" do
+      end
+      it "ある日付の連絡帳がまだしていない場合のレスポンス" do
+      end
     end
   end
 end
