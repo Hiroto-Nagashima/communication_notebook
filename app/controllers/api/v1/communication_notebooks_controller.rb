@@ -10,7 +10,7 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
       render json: {
         status: 400,
         message: "未入力箇所があります"
-        },status: 400
+        }
     end
   end
 
@@ -25,7 +25,7 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
       render json: {
         status: 400,
         message: "未入力箇所があります"
-        },status: 400
+        }
     end
   end
 

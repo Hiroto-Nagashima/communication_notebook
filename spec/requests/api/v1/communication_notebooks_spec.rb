@@ -37,4 +37,12 @@ RSpec.describe "Api::V1::CommunicationNotebooks", type: :request do
       end
     end
   end
+  describe "Post /api/v1/kids/:id/communication_notebooks/" do
+    it "ある子供に紐づく連絡帳を登録するAPI" do
+      post "/api/v1/kids/#{kid.id}/communication_notebooks"
+      # json = JSON.parse(response.body)
+      # expect(response).to have_http_status(200)
+      # expect(json.size).to eq 10
+    end
+  end
 end
