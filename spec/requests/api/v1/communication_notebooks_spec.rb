@@ -24,9 +24,13 @@ RSpec.describe "Api::V1::CommunicationNotebooks", type: :request do
   describe "GET /api/v1/kids/:id/communication_notebooks/new" do
     context "ある日付の連絡帳が既に存在しているかチェックするAPI" do
       it "ある日付の連絡帳が既に存在している場合のレスポンス" do
+        FactoryBot.create(:communication_notebook, kid_id:kid.id, date: "2021-4-26")
+        get "/api/v1/kids/#{kid.id}/communication_notebooks/new", params:{ target_date: "2021-04-26xxxxxxxxx"}
+        expect(response).to have_http_status(200)
+        expect(response.body).to include "already exist"
       end
-      it "ある日付の連絡帳がまだしていない場合のレスポンス" do
-      end
+      # it "ある日付の連絡帳がまだしていない場合のレスポンス" do
+      # end
     end
   end
 end
