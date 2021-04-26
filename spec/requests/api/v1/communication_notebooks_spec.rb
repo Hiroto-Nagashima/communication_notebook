@@ -45,4 +45,12 @@ RSpec.describe "Api::V1::CommunicationNotebooks", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+  describe "Put /api/v1/kids/:id/communication_notebooks/:id" do
+    it "ある子供に紐づく連絡帳を更新するAPI" do
+      # valid_params= attributes_for(:communication_notebook)
+      # expect { post "/api/v1/kids/#{kid.id}/communication_notebooks", params:{communication_notebook: valid_params }}
+      # .to change(CommunicationNotebook, :count).by(+1)
+      # expect(response).to have_http_status(200)
+    end
+  end
 end
