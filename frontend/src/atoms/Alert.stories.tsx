@@ -1,8 +1,5 @@
-import React from 'react';
 import { Story, Meta } from '@storybook/react';
-
 import { Props, SimpleAlerts } from './Alert';
-
 
 export default {
   title: 'atoms/Alert',
@@ -16,8 +13,6 @@ export default {
   ],
 
 } as Meta;
-
-
 
 const Template: Story<Props> = (args) => <SimpleAlerts {...args} />;
 
