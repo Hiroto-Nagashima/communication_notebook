@@ -94,7 +94,7 @@ export const RegistrationPage:VFC= memo(()=>{
 
   const fetchNotebook =()=>(
     axios
-    .get<Array<CommunicationNotebook>>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`,{
+    .get<Array<CommunicationNotebook>>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks/registration`,{
       params:{
         target_date: state
       }
