@@ -1,8 +1,5 @@
-import React from 'react';
 import { Story, Meta } from '@storybook/react';
-
 import { Props, DraggableDialog } from './DraggableDialog';
-
 
 export default {
   title: 'Molecules/DraggableDialog',
@@ -14,7 +11,6 @@ export default {
       </div>
     ),
   ],
-
 } as Meta;
 
 const Template: Story<Props> = (args) => <DraggableDialog {...args} />;
