@@ -25,9 +25,15 @@
   - React
   - TypeScript
 - backend
-  - Ruby On Rails
+  - Ruby on Rails
+- others
+  - Docker
+  - MySQL
 
 
 ## Unit Test
-
-WIP
+- モデル、APIのテストをRSpecを使って実施しています
+- Kidを登録する機能はありませんが、練習を兼ねてKidモデルのバリデーションテストも実施しています
+- 以下のコマンドで実行できます
+<br>
+`docker-compose run app bundle exec rspec`
