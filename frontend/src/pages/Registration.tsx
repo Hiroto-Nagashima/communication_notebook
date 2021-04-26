@@ -67,6 +67,25 @@ export const RegistrationPage:VFC= memo(()=>{
   const { kidId } = useContext(UserContext)
   const history = useHistory()
   const handleClickRegister=() =>{
+    if(isUpdate){
+      axios
+      .put(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`,{
+        communication_notebook:{
+          bodyTemperature: bodyTemperature,
+          mood: selectedIndex,
+          bath: bath,
+          breakfast: breakfast,
+          dinner: dinner,
+          memo: memo,
+          date: state
+        }
+      })
+      .then((res)=>{
+        history.push({pathname: "/top", state: "info"})
+        console.log(res.data)
+      })
+      .catch((e)=>console.log(e))
+    }else
     axios
       .post(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`,{
         communication_notebook:{
