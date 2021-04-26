@@ -54,8 +54,10 @@ export const TopPage:VFC =memo(()=>{
     .catch((e)=> console.log(e))
   }
 
-  const onClickUpdateButton =(date:Date)=>{
-    history.push({pathname:"/registration", state: date})
+  const onClickUpdateButton =(e:React.MouseEvent<HTMLButtonElement>)=>{
+    // history.push({pathname:"/registration"})
+    console.log((e.target as HTMLSpanElement).innerHTML);
+
   }
 
   const handleDateChange = (date: Date | null ) => {
@@ -108,7 +110,7 @@ export const TopPage:VFC =memo(()=>{
         <SimpleAlerts status={status} label={label} />
         {allNotebooks.map((allNotebook)=>(
           <Box>
-            <Button color="primary" variant="contained" onClick={(allNotebook.date)=>onClickUpdateButton}>{allNotebook.date}のノートを表示</Button>
+            <Button color="primary" variant="contained" onClick={onClickUpdateButton} >{allNotebook.date}</Button>
           </Box>
         ))}
       </>
