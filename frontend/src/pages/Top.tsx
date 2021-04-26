@@ -108,8 +108,8 @@ export const TopPage:VFC =memo(()=>{
         <button color="primary"  onClick={onClickPastButton}>過去の連絡帳を見る</button>
         <SimpleAlerts status={status} label={label} />
         {allNotebooks.map((allNotebook)=>(
-          <Box>
-            <Button key={allNotebook.id} color="primary" variant="contained" onClick={(e)=>onClickUpdateButton(e, allNotebook.id)} >{allNotebook.date}</Button>
+          <Box key={allNotebook.id}>
+            <Button color="primary" variant="contained" onClick={(e)=>onClickUpdateButton(e, allNotebook.id)} >{allNotebook.date}</Button>
           </Box>
         ))}
       </>
