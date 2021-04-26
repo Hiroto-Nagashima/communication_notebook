@@ -89,12 +89,35 @@ export const RegistrationPage:VFC= memo(()=>{
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<Date>()
   const location = useLocation()
-  console.log(location)
   const newDate = format(state!, 'yyyy/MM/dd')
-  // console.log(newDate)
   console.log(state)
 
-  const fetchNotebook =()=>(
+  const fetchNewNotebook =()=>(
+    axios
+    .get<CommunicationNotebook>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks/registration`,{
+      params:{
+        target_date: state
+      }
+      }
+    )
+    .then((res)=>{
+      console.log(res.data)
+      setDinner(res.data.dinner)
+      console.log("bye")
+      setBreakfast(res.data.breakfast)
+      setMemo(res.data.memo)
+      setBodyTemperature(res.data.bodyTemperature)
+      setSelectedIndex(res.data.mood)
+      setBath(res.data.bath)
+      }
+    )
+    .catch((e)=> {
+      setError(e)
+      console.log(e)
+    })
+    .finally(() => setLoading(false))
+  )
+  const fetchUpdateNotebook =()=>(
     axios
     .get<Array<CommunicationNotebook>>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks/registration`,{
       params:{
@@ -105,12 +128,13 @@ export const RegistrationPage:VFC= memo(()=>{
     .then((res)=>{
       console.log(res.data)
       setDinner(res.data[0].dinner)
-      console.log("bye")
+      console.log("hi")
       setBreakfast(res.data[0].breakfast)
       setMemo(res.data[0].memo)
       setBodyTemperature(res.data[0].bodyTemperature)
       setSelectedIndex(res.data[0].mood)
       setBath(res.data[0].bath)
+      setIsUpdate(true)
       }
     )
     .catch((e)=> {
@@ -120,11 +144,12 @@ export const RegistrationPage:VFC= memo(()=>{
     .finally(() => setLoading(false))
   )
 
+
   useEffect(()=>{
     if(location.search){
-      fetchNotebook()
+      fetchUpdateNotebook()
     }else{
-      console.log("hello")
+      fetchNewNotebook()
     }
   },[])
 
