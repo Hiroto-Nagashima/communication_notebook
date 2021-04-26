@@ -1,5 +1,4 @@
 import { Story, Meta } from '@storybook/react';
-
 import  {CircularDeterminate, Props} from './Spinner';
 
 export default {

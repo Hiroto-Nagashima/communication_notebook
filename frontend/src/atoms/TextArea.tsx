@@ -1,4 +1,4 @@
-import React, { VFC, ChangeEvent } from 'react';
+import { VFC, ChangeEvent } from 'react';
 import TextField from '@material-ui/core/TextField';
 
 export type Props={
@@ -11,7 +11,6 @@ export type Props={
 // 列の指定ができるTextarea
 export const MultilineTextField:VFC<Props>=(props)=> {
   const { label,row, value, onChange } = props
-  console.log("レンダー")
   return (
     <TextField
     id="outlined-multiline-static"
