@@ -34,6 +34,7 @@ export const TopPage:VFC =memo(()=>{
     })
     .then((res)=>{
       if(res.data.status === "no data"){
+        console.log(selectedDate)
         history.push({pathname:"/registration", state:selectedDate})
       }else{
         setStatus("warning")

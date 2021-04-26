@@ -89,12 +89,12 @@ export const RegistrationPage:VFC= memo(()=>{
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<Date>()
   const newDate = format(state!, 'yyyy/MM/dd')
-  console.log(newDate)
-  console.log(kidId)
+  // console.log(newDate)
+  console.log(state)
 
   const fetchNotebook =()=>(
     axios
-    .get<CommunicationNotebook>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`,{
+    .get<Array<CommunicationNotebook>>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`,{
       params:{
         target_date: state
       }
@@ -102,13 +102,13 @@ export const RegistrationPage:VFC= memo(()=>{
     )
     .then((res)=>{
       console.log(res.data)
-      setDinner(res.data.dinner)
+      setDinner(res.data[0].dinner)
       console.log("bye")
-      setBreakfast(res.data.breakfast)
-      setMemo(res.data.memo)
-      setBodyTemperature(res.data.bodyTemperature)
-      setSelectedIndex(res.data.mood)
-      setBath(res.data.bath)
+      setBreakfast(res.data[0].breakfast)
+      setMemo(res.data[0].memo)
+      setBodyTemperature(res.data[0].bodyTemperature)
+      setSelectedIndex(res.data[0].mood)
+      setBath(res.data[0].bath)
       }
     )
     .catch((e)=> {
