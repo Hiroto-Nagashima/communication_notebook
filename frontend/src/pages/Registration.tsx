@@ -70,7 +70,7 @@ export const RegistrationPage:VFC= memo(()=>{
   const handleClickRegister=() =>{
     if(isUpdate){
       axios
-      .put(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks`,{
+      .put(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks/${ qs.id }`,{
         communication_notebook:{
           bodyTemperature: bodyTemperature,
           mood: selectedIndex,
@@ -173,9 +173,6 @@ export const RegistrationPage:VFC= memo(()=>{
       fetchNewNotebook()
     }
   },[])
-
-  // useEffect(()=>{
-  // },[])
 
   return (
     <>
