@@ -30,12 +30,10 @@ export const RegistrationPage:VFC= ()=>{
 
   const handleDinnerChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setDinner(e.target.value);
-    console.log("1")
   },[])
 
   const handleBreakfastChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setBreakfast(e.target.value);
-    console.log("2")
   },[])
 
   const handleMemoChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +46,6 @@ export const RegistrationPage:VFC= ()=>{
 
   const handleBathChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
     setBath((e.target as HTMLInputElement).value);
-    console.log(bath)
   },[]);
 
   const handleClose = useCallback(() => {
@@ -62,7 +59,6 @@ export const RegistrationPage:VFC= ()=>{
   const handleMenuItemClick = useCallback((event: React.MouseEvent<HTMLElement>, index: number) => {
     setSelectedIndex(index);
     setAnchorEl(null);
-    console.log(selectedIndex)
   },[])
 
   const handleDialogOpen = useCallback(() => {
@@ -89,7 +85,6 @@ export const RegistrationPage:VFC= ()=>{
       })
       .then((res)=>{
         history.push({pathname: "/top", state: "info"})
-        console.log(res.data)
       })
       .catch((e)=>console.log(e))
     }else
@@ -107,7 +102,6 @@ export const RegistrationPage:VFC= ()=>{
       })
       .then((res)=>{
         history.push({pathname: "/top", state: "success"})
-        console.log(res.data)
       })
       .catch((e)=>console.log(e))
   }
@@ -120,9 +114,7 @@ export const RegistrationPage:VFC= ()=>{
       }
     })
     .then((res)=>{
-      console.log(res.data)
       setDinner(res.data.dinner)
-      console.log("bye")
       setBreakfast(res.data.breakfast)
       setMemo(res.data.memo)
       setBodyTemperature(res.data.bodyTemperature)
@@ -143,9 +135,7 @@ export const RegistrationPage:VFC= ()=>{
       }
     })
     .then((res)=>{
-      console.log(res.data)
       setDinner(res.data[0].dinner)
-      console.log("hi")
       setBreakfast(res.data[0].breakfast)
       setMemo(res.data[0].memo)
       setBodyTemperature(res.data[0].bodyTemperature)
