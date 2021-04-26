@@ -1,5 +1,4 @@
 import { Story, Meta } from '@storybook/react';
-
 import { MenuAppBar, Props } from './Header';
 
 export default {
