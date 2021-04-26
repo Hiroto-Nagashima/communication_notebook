@@ -1,11 +1,10 @@
 import axios from "axios";
 import 'date-fns';
-import format from "date-fns/format";
 import { useContext, useEffect, useState, VFC, memo } from "react";
 import { MenuAppBar } from '../organisms/Header'
 import { Kid } from '../types/api/kid'
 import { CircularDeterminate } from '../atoms/Spinner'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { DatePicker } from "../atoms/DatePicker";
 import { UserContext } from "../provider/UserProvider";
 import { SimpleAlerts } from "../atoms/Alert";
@@ -43,6 +42,7 @@ export const TopPage:VFC =memo(()=>{
     })
     .catch((e)=> console.log(e))
   }
+
   const onClickPastButton =()=>{
     axios
     .get(`http://localhost:3000/api/v1/kids/${kidId}/communication_notebooks`)
@@ -63,6 +63,7 @@ export const TopPage:VFC =memo(()=>{
     setSelectedDate(date)
     console.log(date)
   };
+
   const fetchUser =()=>(
     axios
     .get<Kid>(`http://localhost:3000/api/v1/kids/${kidId}`,{
@@ -87,34 +88,35 @@ export const TopPage:VFC =memo(()=>{
   useEffect(()=>{
     fetchUser()
   },[])
+
   return (
     <>
-    {loading?
-      <CircularDeterminate/>
-      :error?(
-        <h1>エラー</h1>
-      ):(
-      <>
-        <MenuAppBar
-          title="NoteBook"
-          iconColor="inherit"
-          barColor="primary"
-          auth= {true}
-          name={result?.name}
-          daycare_name={result?.daycare_name}
-        />
-        <DatePicker onChangeDate={handleDateChange}  selectedDate={selectedDate}/>
-        <button color="primary"  onClick={onClickNewButton}>連絡帳を新規登録</button>
-        <button color="primary"  onClick={onClickPastButton}>過去の連絡帳を見る</button>
-        <SimpleAlerts status={status} label={label} />
-        {allNotebooks.map((allNotebook)=>(
-          <Box key={allNotebook.id}>
-            <Button color="primary" variant="contained" onClick={(e)=>onClickUpdateButton(e, allNotebook.id)} >{allNotebook.date}</Button>
-          </Box>
-        ))}
-      </>
-      )
-    }
+      {loading?
+        <CircularDeterminate/>
+        :error?(
+          <h1>エラー</h1>
+        ):(
+        <>
+          <MenuAppBar
+            title="NoteBook"
+            iconColor="inherit"
+            barColor="primary"
+            auth= {true}
+            name={result?.name}
+            daycare_name={result?.daycare_name}
+          />
+          <DatePicker onChangeDate={handleDateChange}  selectedDate={selectedDate}/>
+          <button color="primary"  onClick={onClickNewButton}>連絡帳を新規登録</button>
+          <button color="primary"  onClick={onClickPastButton}>過去の連絡帳を見る</button>
+          <SimpleAlerts status={status} label={label} />
+          {allNotebooks.map((allNotebook)=>(
+            <Box key={allNotebook.id}>
+              <Button color="primary" variant="contained" onClick={(e)=>onClickUpdateButton(e, allNotebook.id)} >{allNotebook.date}</Button>
+            </Box>
+          ))}
+        </>
+        )
+      }
     </>
   )
 })

@@ -16,7 +16,7 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
 
   def update
     kid = Kid.find(params[:kid_id])
-    communication_notebook = kid.communication_notebooks.where(date: params[:target_date])
+    communication_notebook = kid.communication_notebooks.find_by(id: params[:id])
     if communication_notebook.update(communication_notebook_params)
       render json: {
         status: "ok"
