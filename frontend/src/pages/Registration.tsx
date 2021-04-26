@@ -6,6 +6,7 @@ import { InputOfNotebook } from "../organisms/InputOfNotebook";
 import { CommunicationNotebook } from "../types/api/communication_notebook";
 import { UserContext } from "../provider/UserProvider";
 import format from "date-fns/format";
+import queryString from 'query-string';
 
 export const RegistrationPage:VFC= memo(()=>{
   const [loading, setLoading] = useState(true)
