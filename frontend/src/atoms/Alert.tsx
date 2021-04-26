@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import { VFC } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 
