@@ -88,6 +88,8 @@ export const RegistrationPage:VFC= memo(()=>{
 
 //以下のstateはTop.tsxから遷移してきた時に送られてくる。DatePickerで選択した日付が入っている.
   const { state } = useLocation<Date>()
+  const location = useLocation()
+  console.log(location)
   const newDate = format(state!, 'yyyy/MM/dd')
   // console.log(newDate)
   console.log(state)
@@ -119,8 +121,12 @@ export const RegistrationPage:VFC= memo(()=>{
   )
 
   useEffect(()=>{
-    fetchNotebook()
-  },[isUpdate])
+    if(location.search){
+      fetchNotebook()
+    }else{
+      console.log("hello")
+    }
+  },[])
 
   // useEffect(()=>{
   // },[])

@@ -58,7 +58,7 @@ export const TopPage:VFC =memo(()=>{
   const onClickUpdateButton =(e:React.MouseEvent<HTMLButtonElement>)=>{
     const newDate = new Date((e.target as HTMLSpanElement).innerHTML)
     console.log(newDate);
-    history.push({pathname:"/registration", state: newDate})
+    history.push({pathname:"/registration", state: newDate, search:"?update=true"})
   }
 
   const handleDateChange = (date: Date | null ) => {
