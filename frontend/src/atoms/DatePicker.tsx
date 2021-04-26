@@ -3,12 +3,10 @@ import ja from "date-fns/locale/ja";
 import format from "date-fns/format";
 import { VFC, memo } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
-import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-
 
 class ExtendedUtils extends DateFnsUtils {
   getCalendarHeaderText(date: Date) {
@@ -18,8 +16,9 @@ class ExtendedUtils extends DateFnsUtils {
     return format(date, "MMMd日", { locale: this.locale });
   }
 }
+
 export type Props = {
-  onChangeDate:(date: Date | null)=>void
+  onChangeDate: (date: Date | null)=>void
   selectedDate: string | Date | null
 }
 
