@@ -14,10 +14,10 @@ export const ComposedTextField:VFC<Props>=(props)=> {
   const { textName, placeholder,onChange, value } = props
 
   return (
-      <SFormControl variant="outlined">
-        <InputLabel htmlFor="component-outlined">{textName}</InputLabel>
-        <OutlinedInput style={{width:"100%"}} id="component-outlined" value={value} onChange={onChange} label={textName} placeholder={placeholder}  />
-      </SFormControl>
+    <SFormControl variant="outlined">
+      <InputLabel htmlFor="component-outlined">{textName}</InputLabel>
+      <OutlinedInput style={{width:"100%"}} id="component-outlined" value={value} onChange={onChange} label={textName} placeholder={placeholder}  />
+    </SFormControl>
   );
 }
 const SFormControl=styled(FormControl)`
