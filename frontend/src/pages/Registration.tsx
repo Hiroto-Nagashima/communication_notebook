@@ -110,7 +110,8 @@ export const RegistrationPage:VFC= memo(()=>{
   const { state } = useLocation<Date>()
   const location = useLocation()
   const newDate = format(state!, 'yyyy/MM/dd')
-  console.log(state)
+  const qs = queryString.parse(location.search)
+  console.log(qs.id)
 
   const fetchNewNotebook =()=>(
     axios
