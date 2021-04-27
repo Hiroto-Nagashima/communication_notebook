@@ -15,9 +15,14 @@ export default {
 
 const Template: Story<Props> = (args) => <DraggableDialog {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
+export const Closed = Template.bind({});
+Closed.args = {
+  isOpen: false
+};
 
+export const Opened = Template.bind({});
+Opened.args = {
+  isOpen: true
 };
 
 
