@@ -26,7 +26,7 @@ export const TopPage:VFC =memo(()=>{
 
   const onClickNewButton =()=>{
     axios
-    .get(`http://localhost:3000/api/v1/kids/${kidId}/communication_notebooks/new`,{
+    .get(`http://localhost:3000/api/v1/kids/${kidId}/communication_notebooks/doesExist`,{
       params:{
         target_date: selectedDate
       }
