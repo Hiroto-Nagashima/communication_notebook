@@ -108,7 +108,7 @@ paths:
             $ref: '#/definitions/400NoInputError'
         200:
           description: "OK"
-  /kid/:id/communication_notebooks/new:
+  /kid/:id/communication_notebooks/doesExist:
     get:
       tags:
       - "communication_notebooks"
@@ -121,16 +121,23 @@ paths:
           required: true
           type: integer
           format: int32
+        - name: target_date
+          in: query
+          type: string
+          description: Datepickerにて選択された日付
+          required: true
       responses:
-        200:
-          description: "成功時のレスポンス"
-          schema:
-            type: array
-            $ref: '#/definitions/Communication_notebook'
-        404:
-          description: "該当する連絡帳が見つからない"
-          schema:
-            $ref: '#/definitions/404Error'
+          200:
+            description: 連絡帳の有無
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: 存在している場合
+                  example: "already exist"
+          400:
+            description: 日付が選択されていない
 definitions:
   Communication_notebook:
     type: object
