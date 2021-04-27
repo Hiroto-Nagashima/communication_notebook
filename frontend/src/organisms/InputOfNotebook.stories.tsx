@@ -1,5 +1,4 @@
 import { Story, Meta } from '@storybook/react';
-
 import { Props, InputOfNotebook} from './InputOfNotebook';
 
 export default {
@@ -12,10 +11,14 @@ const Template: Story<Props> = (args) => <InputOfNotebook {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-
+  selectedDate: "2021/4/27",
+  dinner: "ハンバーグ",
+  breakfast: "ヨーグルト",
+  memo: "元気です",
+  body_temperature: 36.7,
+  bath: "有",
+  index: 1,
+  anchorEl: null,
+  isOpen: false
 };
 
-// export const LoggedOut = Template.bind({});
-// LoggedOut.args = {
-//   auth:false
-// };
