@@ -108,7 +108,7 @@ export const RegistrationPage:VFC= ()=>{
 
   const fetchNewNotebook =()=>(
     axios
-    .get<CommunicationNotebook>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks/registration`,{
+    .get<CommunicationNotebook>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks/findByDate`,{
       params:{
         target_date: state
       }
@@ -129,7 +129,7 @@ export const RegistrationPage:VFC= ()=>{
   )
   const fetchUpdateNotebook =()=>(
     axios
-    .get<Array<CommunicationNotebook>>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks/registration`,{
+    .get<Array<CommunicationNotebook>>(`http://localhost:3000/api/v1/kids/${ kidId }/communication_notebooks/findByDate`,{
       params:{
         target_date: state
       }
