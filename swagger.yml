@@ -34,16 +34,16 @@ paths:
           description: "該当する子供が見つからない"
           schema:
             $ref: '#/definitions/404Error'
-  /communication_notebooks/:id:
+  /kid/:id/communication_notebooks:
     get:
       tags:
       - "communication_notebooks"
-      summary: "ある日付の連絡帳の詳細表示"
+      summary: "ある子供の全ての連絡帳表示"
       description: ""
       parameters:
-        - name: communication_notebook_id
+        - name: kid_id
           in: path
-          description: 連絡帳のID
+          description: 子供のID
           required: true
           type: integer
           format: int32
@@ -51,11 +51,13 @@ paths:
         200:
           description: "成功時のレスポンス"
           schema:
+            type: array
             $ref: '#/definitions/Communication_notebook'
         404:
           description: "該当する連絡帳が見つからない"
           schema:
             $ref: '#/definitions/404Error'
+  # /kid/:id/communication_notebooks:
     put:
       tags:
       - "communication_notebooks"
