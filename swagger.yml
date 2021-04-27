@@ -57,19 +57,25 @@ paths:
           description: "該当する連絡帳が見つからない"
           schema:
             $ref: '#/definitions/404Error'
-  # /kid/:id/communication_notebooks:
+  /kid/:id/communication_notebooks/:id:
     put:
       tags:
       - "communication_notebooks"
       summary: "ある日付の連絡帳を更新"
       description: ""
       parameters:
-        - name: "notebook"
-          in: body
-          description: 連絡帳の特定の情報を更新
+        - name: kid_id
+          in: path
+          description: 子供のID
           required: true
-          schema:
-            $ref: '#/definitions/Communication_notebook'
+          type: integer
+          format: int32
+        - name: communication_notebook_id
+          in: path
+          description: 連絡帳のID
+          required: true
+          type: integer
+          format: int32
       responses:
         400:
           description: "未入力箇所がある場合無効"
