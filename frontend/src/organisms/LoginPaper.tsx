@@ -5,8 +5,6 @@ import { ComposedTextField } from '../atoms/TextField';
 import { MyButton } from '../atoms/Button';
 import { VFC } from 'react';
 
-import { Link } from 'react-router-dom'
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -33,8 +31,6 @@ export const LoginPaper:VFC<Props>=(props)=> {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      {/* <Paper elevation={0} />
-      <Paper /> */}
       <Paper elevation={3}>
         <Box component="h1" p={2} textAlign="center">
           {title}
@@ -43,7 +39,6 @@ export const LoginPaper:VFC<Props>=(props)=> {
           <ComposedTextField textName="ID" placeholder="1 or 2" value={value} onChange={onChange}/>
         </Box>
         <Box textAlign="center">
-          {/* <Link to="/login"><MyButton variant="contained" color="primary" label="Login"/></Link> */}
           <MyButton onClick={onClick} variant="contained" color="primary" label="Login"/>
         </Box>
       </Paper>
