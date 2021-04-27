@@ -1,4 +1,4 @@
-import React, { VFC, ChangeEvent, MouseEventHandler } from 'react';
+import React, { VFC, MouseEventHandler } from 'react';
 import { Button, Input, Menu, MenuItem } from '@material-ui/core';
 
 const OPTIONS = [
@@ -36,7 +36,6 @@ export const SimpleMenu:VFC<Props>=(props)=> {
             value={option.label}
             selected={index === Index }
             onClick={(event)=>onClickMenuItem(event, index)}
-            // onClick={(event) => handleMenuItemClick(event, index)}
           >
           { option.label }
           </MenuItem>
