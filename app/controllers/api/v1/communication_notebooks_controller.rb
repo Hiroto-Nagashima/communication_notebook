@@ -35,7 +35,7 @@ class Api::V1::CommunicationNotebooksController < ApplicationController
     render json: communication_notebooks
   end
 
-  def registration
+  def findByDate
     target_date = params[:target_date]
     new_date = target_date.slice(0..9)
     communication_notebook = CommunicationNotebook.where("date like?", "#{new_date}%")
